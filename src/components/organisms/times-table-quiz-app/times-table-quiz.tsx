@@ -1,7 +1,9 @@
 import { clsx } from "clsx";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import AnswerInput from "../../atoms/answer-input";
 import Timer from "../../atoms/timer";
-import InputPanel from "../input-panel";
+import Keypad from "../../molecules/keypad";
+import { useAnswerInput } from "./hooks";
 import type { QuizConfiguration, QuizItem, QuizResultItem } from "./types";
 
 export type TimesTableQuizProps = {
@@ -13,14 +15,29 @@ function TimesTableQuiz({
   config,
   onQuizFinish,
 }: TimesTableQuizProps) {
-  const [quizResults, setQuizResults] = useState<Array<QuizResultItem>>([]);
-
   const { selectedTimesColumn, quizTimerSeconds } = config;
 
-  const [currentQuizItem, setCurrentQuizItem] = useState<QuizItem | null>(null);
-  const [userInput, setUserInput] = useState<string>("");
+  const [isQuizPaused, setIsQuizPaused] = useState<boolean>(true);
 
-  const [isTimerPaused, setIsTimerPaused] = useState<boolean>(true);
+  const [currentQuizItem, setCurrentQuizItem] = useState<QuizItem | null>(null);
+  const [quizResults, setQuizResults] = useState<Array<QuizResultItem>>([]);
+
+  const {
+    inputValue: userAnswerInput,
+    setInputValue: setUserAnswerInput,
+    append: appendUserAnswerInput,
+    backspace: backspaceUserAnswerInput,
+    clear: clearUserAnswerInput,
+  } = useAnswerInput();
+
+  const answerInputRef = useRef<HTMLInputElement>(null);
+  const focusOnAnswerInput = () => answerInputRef.current?.focus();
+
+  useEffect(() => {
+    if (!isQuizPaused) {
+      focusOnAnswerInput();
+    }
+  }, [isQuizPaused]);
 
   const createNewQuiz = () => {
     let quiz = generateQuiz(selectedTimesColumn);
@@ -59,16 +76,16 @@ function TimesTableQuiz({
 
   const handleStartTimerTimeout = () => {
     createNewQuiz();
-    setIsTimerPaused(false);
+    setIsQuizPaused(false);
   };
 
   const handleAnswerSubmit = (answer: string) => {
     if (!currentQuizItem) return;
 
+    clearUserAnswerInput();
+
     currentQuizItem.userAnswer = answer;
-
     evaluateQuizResult();
-
     createNewQuiz();
   };
 
@@ -84,27 +101,38 @@ function TimesTableQuiz({
       <div className="flex-grow">
         <Timer
           countDownSeconds={quizTimerSeconds}
-          paused={isTimerPaused}
-          onFinish={() => {
-            const message = `Time's up! SCORE: ${quizResults.filter(q => q.correct).length}/${quizResults.length}\n\n`;
-            alert(message + quizResults.map(q => `${JSON.stringify(q.quizItem)}\t${q.correct ? "CORRECT" : "WRONG"}`).join("\n"));
-
-            onQuizFinish(quizResults);
-          }}
+          paused={isQuizPaused}
+          onFinish={() => onQuizFinish(quizResults)}
         />
         <div>{problem}</div>
-        <div>{userInput}</div>
+        <form
+          method="POST"
+          onSubmit={(e) => { e.preventDefault(); handleAnswerSubmit(userAnswerInput) }}
+        >
+          <AnswerInput
+            ref={answerInputRef}
+            inputMode="none"
+            maxLength={3}
+            value={userAnswerInput}
+            onKeyDown={(e) => {
+              if (e.key === "Delete") clearUserAnswerInput();
+            }}
+            onChange={(e) => setUserAnswerInput(e.target.value)}
+            disabled={isQuizPaused}
+          />
+        </form>
       </div>
       <Timer
         countDownSeconds={3}
         timeoutMessage="START"
         onFinish={handleStartTimerTimeout}
       />
-      <InputPanel
-        onInputChange={(input) => setUserInput(input)}
-        onSubmitInput={(answer) => handleAnswerSubmit(answer)}
-        disabled={!currentQuizItem}
-        hideInputDisplay
+      <Keypad
+        disabled={isQuizPaused}
+        onInputNumber={(inputNumber) => { focusOnAnswerInput(); appendUserAnswerInput(inputNumber) }}
+        onEnter={() => handleAnswerSubmit(userAnswerInput)}
+        onBackSpace={() => backspaceUserAnswerInput()}
+        onClear={() => clearUserAnswerInput()}
       />
     </div>
   );

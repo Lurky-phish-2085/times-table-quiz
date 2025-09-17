@@ -47,7 +47,7 @@ function TimesTableSelector({
     >
       <div>Select Columns to Practice</div>
       <button
-        className="border-2 border-red-500 px-8 py-4 rounded-3xl text-red-500 font-bold text-xl hover:bg-red-500 hover:text-white transition-colors"
+        className="border-2 border-red-500 px-8 py-4 rounded-full text-red-500 font-bold text-xl hover:bg-red-500 hover:text-white transition-colors"
         onClick={() => onSubmitInput?.call(undefined, { selectedTimesColumn: selectedColumns, quizTimerSeconds: 0 })}
       >
         Start Now

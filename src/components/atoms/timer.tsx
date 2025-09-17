@@ -1,32 +1,33 @@
 import { clsx } from "clsx";
 import { useEffect, useState, type HtmlHTMLAttributes } from "react";
-import { useInterval } from "usehooks-ts";
+import { useCountdown } from "usehooks-ts";
+
+const HIDE_DELAY_MS = 500;
 
 type TimerProps = {
   countDownSeconds: number;
   timeoutMessage?: string;
   paused?: boolean;
   hidingDisabled?: boolean;
-  hideOnTimeoutDelaySeconds?: number;
+  hideDelaySeconds?: number;
   onFinish?: () => void;
 }
   & HtmlHTMLAttributes<HTMLDivElement>;
-
-const ONE_SECOND = 1000;
-const HIDE_DELAY_MS = 500;
 
 function Timer({
   countDownSeconds,
   timeoutMessage,
   paused,
   hidingDisabled,
-  hideOnTimeoutDelaySeconds = HIDE_DELAY_MS / 1000,
+  hideDelaySeconds = HIDE_DELAY_MS / 1000,
   onFinish,
   className,
   ...props
 }: TimerProps) {
-  const [count, setCount] = useState<number>(countDownSeconds);
-  const decrementCount = () => setCount((prev) => prev - 1);
+  const [count, { startCountdown, stopCountdown }] =
+    useCountdown({
+      countStart: countDownSeconds,
+    });
 
   const [isHidden, setIsHidden] = useState<boolean>(false);
 
@@ -35,13 +36,16 @@ function Timer({
   const hide = () => {
     setTimeout(() => {
       setIsHidden(true);
-    }, hideOnTimeoutDelaySeconds * 1000);
+    }, hideDelaySeconds * 1000);
   };
 
-  useInterval(() => {
-    decrementCount();
-
-  }, !(isFinished() || paused) ? ONE_SECOND : null);
+  useEffect(() => {
+    if (paused) {
+      stopCountdown();
+    } else {
+      startCountdown();
+    }
+  }, [paused]);
 
   useEffect(() => {
     if (isFinished()) {

@@ -1,6 +1,8 @@
-import { useEffect, useState, type ChangeEvent, type HtmlHTMLAttributes } from "react";
-import type { QuizConfiguration } from "./types";
 import clsx from "clsx";
+import { useEffect, useState, type ChangeEvent, type HtmlHTMLAttributes } from "react";
+import OutlineButton from "../../atoms/outline-button";
+import Surface from "../../atoms/surface";
+import type { QuizConfiguration } from "./types";
 
 const MAX_TIMES_COLUMN = 12;
 
@@ -14,8 +16,7 @@ type TimesTableSelectorProps = {
 
 function TimesTableSelector({
   onSubmitInput,
-  className,
-  ...props
+  className
 }: TimesTableSelectorProps) {
   const [selectedColumns, setSelectedColumns] = useState<Array<number>>([]);
   const selectAllColumns = () => setSelectedColumns([]);
@@ -46,21 +47,17 @@ function TimesTableSelector({
       )}
     >
       <div>Select Columns to Practice</div>
-      <button
-        className="border-2 border-red-500 px-8 py-4 rounded-full text-red-500 font-bold text-xl hover:bg-red-500 hover:text-white transition-colors"
+      <OutlineButton
         onClick={() => onSubmitInput?.call(undefined, { selectedTimesColumn: selectedColumns, quizTimerSeconds: 0 })}
       >
         Start Now
-      </button>
-      <div
+      </OutlineButton>
+      <Surface
         className={clsx(
-          "py-8 mx-4",
-          "border-2 rounded-lg",
-          "bg-gray-100",
+          "mx-4",
           "grid place-items-center gap-4",
           "self-stretch",
         )}
-        {...props}
       >
         <div className="grid place-items-center gap-4 md:flex">
           <label>
@@ -97,7 +94,7 @@ function TimesTableSelector({
             </label>
           ))}
         </div>
-      </div>
+      </Surface>
     </div>
   );
 }

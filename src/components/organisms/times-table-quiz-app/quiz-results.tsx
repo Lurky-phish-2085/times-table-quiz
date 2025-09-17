@@ -1,3 +1,5 @@
+import FilledButton from "../../atoms/filled-button";
+import OutlineButton from "../../atoms/outline-button";
 import type { QuizResultItem, TimesTableQuizAppScreenStates } from "./types";
 
 type QuizResultsProps = {
@@ -15,18 +17,21 @@ function QuizResults({ data: results, onNavigate }: QuizResultsProps) {
       <h1 className="text-xl">Results:</h1>
       <div>Correct: {correctAnswersCount}</div>
       <div>Wrong: {wrongAnswersCount}</div>
-      <button
-        className="border-2 border-red-500 px-8 py-4 rounded-3xl text-red-500 font-bold text-xl hover:bg-red-500 hover:text-white transition-colors"
+      <OutlineButton
         onClick={() => onNavigate("MISTAKES")}
-      >View Mistakes</button>
-      <button
-        className="border-2 border-red-500 px-8 py-4 rounded-3xl text-red-500 font-bold text-xl hover:bg-red-500 hover:text-white transition-colors"
+      >
+        View Mistakes
+      </OutlineButton>
+      <FilledButton
         onClick={() => onNavigate("QUIZ")}
-      >Retry</button>
-      <button
-        className="border-2 border-red-500 px-8 py-4 rounded-3xl text-red-500 font-bold text-xl hover:bg-red-500 hover:text-white transition-colors"
+      >
+        Play Again
+      </FilledButton>
+      <OutlineButton
         onClick={() => onNavigate("SELECTION")}
-      >Change Selection</button>
+      >
+        Change Selection
+      </OutlineButton>
     </div>
   );
 }

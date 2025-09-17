@@ -41,17 +41,21 @@ function KeypadButton({
 
   return (
     <button
-      ref={ref}
-      {...props}
       tabIndex={-1}
       className={clsx(
-        "py-6 px-10 border border-black rounded-md",
-        "transition-colors hover:bg-blue-800/20 active:bg-blue-800/45",
-        { "bg-blue-800/45": isActive },
+        "border-2 rounded-2xl",
+        "bg-neutral-100",
+        "py-3.5 px-10 border rounded-md",
+        "transition-colors",
+        "hover:bg-primary-light",
+        "active:bg-primary/80 active:border-primary/80 active:text-white",
+        { "bg-primary/80 border-primary/80 text-white": isActive },
         "text-center uppercase text-xl font-bold",
         className,
       )}
+      ref={ref}
       onMouseDown={(e) => { e.preventDefault(); onClick?.call(undefined, e) }}
+      {...props}
     >
     </button>
   );

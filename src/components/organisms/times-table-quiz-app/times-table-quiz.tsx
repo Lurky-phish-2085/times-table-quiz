@@ -129,8 +129,9 @@ function TimesTableQuiz({
       />
       <Keypad
         disabled={isQuizPaused}
+        enterDisabled={!userAnswerInput}
         onInputNumber={(inputNumber) => { focusOnAnswerInput(); appendUserAnswerInput(inputNumber) }}
-        onEnter={() => handleAnswerSubmit(userAnswerInput)}
+        onEnter={() => { focusOnAnswerInput(); handleAnswerSubmit(userAnswerInput) }}
         onBackSpace={() => backspaceUserAnswerInput()}
         onClear={() => clearUserAnswerInput()}
       />

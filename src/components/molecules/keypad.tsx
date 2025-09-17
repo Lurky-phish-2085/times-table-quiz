@@ -1,9 +1,12 @@
+import clsx from "clsx";
 import { type HtmlHTMLAttributes, type RefAttributes } from "react";
 import { FaBackspace, FaEraser } from "react-icons/fa";
+import FilledButton from "../atoms/filled-button";
 import KeypadButton from "../atoms/keypad-button";
 
 type KeypadProps = {
   disabled?: boolean;
+  enterDisabled?: boolean;
   onInputNumber: (number: string) => void;
   onEnter?: () => void;
   onBackSpace?: () => void;
@@ -17,6 +20,7 @@ const numbers: Array<string> = Array.from({ length: 9 }, (_, i) => String(i + 1)
 
 function Keypad({
   disabled,
+  enterDisabled,
   onInputNumber,
   onEnter,
   onBackSpace,
@@ -26,57 +30,54 @@ function Keypad({
 }: KeypadProps) {
   return (
     <div
+      className="grid place-items-center gap-4"
       ref={ref}
       {...props}
     >
-      <div className="flex flex-col gap-2">
-        <div className="flex justify-end gap-2">
+      <div
+        className={clsx(
+          "grid grid-cols-3 gap-2",
+        )}
+      >
+        {numbers.map(((numberValue, index) => (
           <KeypadButton
-            glowOnKey="Delete"
-            onClick={onClear}
+            key={index}
+            glowOnKey={numberValue}
+            onClick={() => onInputNumber(numberValue)}
             disabled={disabled}
           >
-            <FaEraser className="text-xl" />
+            {numberValue}
           </KeypadButton>
-          <KeypadButton
-            glowOnKey="Backspace"
-            onClick={onBackSpace}
-            disabled={disabled}
-          >
-            <FaBackspace className="text-xl" />
-          </KeypadButton>
-        </div>
-        <div className="grid grid-cols-3 gap-2">
-          {numbers.map(((numberValue, index) => (
-            <KeypadButton
-              key={index}
-              glowOnKey={numberValue}
-              onClick={() => onInputNumber(numberValue)}
-              disabled={disabled}
-            >
-              {numberValue}
-            </KeypadButton>
-          )))}
-        </div>
-        <div className="flex gap-2">
-          <KeypadButton
-            glowOnKey="0"
-            onClick={() => onInputNumber?.call(undefined, "0")}
-            className="flex-grow"
-            disabled={disabled}
-          >
-            0
-          </KeypadButton>
-          <KeypadButton
-            glowOnKey="Enter"
-            onClick={onEnter}
-            disabled={disabled}
-          >
-            ENTER
-          </KeypadButton>
-        </div>
+        )))}
+        <KeypadButton
+          glowOnKey="Delete"
+          onClick={onClear}
+          disabled={disabled}
+        >
+          <FaEraser className="text-xl mx-auto" />
+        </KeypadButton>
+        <KeypadButton
+          glowOnKey="0"
+          onClick={() => onInputNumber?.call(undefined, "0")}
+          disabled={disabled}
+        >
+          0
+        </KeypadButton>
+        <KeypadButton
+          glowOnKey="Backspace"
+          onClick={onBackSpace}
+          disabled={disabled}
+        >
+          <FaBackspace className="text-xl mx-auto" />
+        </KeypadButton>
       </div>
-    </div >
+      <FilledButton
+        onClick={onEnter}
+        disabled={enterDisabled}
+      >
+        Submit Answer
+      </FilledButton>
+    </div>
   );
 }
 

@@ -30,7 +30,7 @@ function Keypad({
 }: KeypadProps) {
   return (
     <div
-      className="grid place-items-center gap-4"
+      className="flex flex-col gap-4"
       ref={ref}
       {...props}
     >

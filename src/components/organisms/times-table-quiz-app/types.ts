@@ -3,8 +3,13 @@ export type TimesTableQuizAppScreenStates = "SELECTION"
   | "RESULT"
   | "MISTAKES";
 
+export type TimesProblem = {
+  multiplicand: number;
+  multiplier: number;
+};
+
 export type QuizItem = {
-  problem: string;
+  problem: TimesProblem;
   answer: string;
   userAnswer: string;
 };

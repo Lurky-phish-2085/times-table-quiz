@@ -1,10 +1,12 @@
 import { clsx } from "clsx";
 import { useEffect, useRef, useState } from "react";
 import AnswerInput from "../../atoms/answer-input";
-import Timer from "../../atoms/timer";
+import TimesProblemDisplay from "../../atoms/times-problem-display";
 import Keypad from "../../molecules/keypad";
-import { useAnswerInput } from "./hooks";
-import type { QuizConfiguration, QuizItem, QuizResultItem } from "./types";
+import QuizStartCountdown from "../../molecules/quiz-start-countdown";
+import TimerProgressIndicatorBar from "../../molecules/timer-progress-indicataor-bar";
+import { useAnswerInput, useQuizTimer } from "./hooks";
+import type { QuizConfiguration, QuizItem, QuizResultItem, TimesProblem } from "./types";
 
 export type TimesTableQuizProps = {
   config: QuizConfiguration;
@@ -89,55 +91,91 @@ function TimesTableQuiz({
     createNewQuiz();
   };
 
-  const problem = currentQuizItem?.problem ?? "";
+  const { remainingSeconds } = useQuizTimer({
+    countStart: quizTimerSeconds,
+    paused: isQuizPaused,
+    onEnd: () => onQuizFinish(quizResults),
+  });
+
+  const problem = currentQuizItem?.problem;
+  const isInteractionDisabled = isQuizPaused || remainingSeconds === 0;
 
   return (
     <div
       className={clsx(
-        "p-4 h-dvh",
-        "flex flex-col lg:flex-row",
+        "p-4 h-dvh flex flex-col gap-36",
       )}
     >
-      <div className="flex-grow">
-        <Timer
-          countDownSeconds={quizTimerSeconds}
-          paused={isQuizPaused}
-          onFinish={() => onQuizFinish(quizResults)}
+      <div
+        className="max-lg:hidden flex flex-col"
+      >
+        <div className="flex justify-between text-xs font-bold text-gray-500">
+          <div>TIME: {remainingSeconds}</div>
+          <div>SCORE: {remainingSeconds}</div>
+        </div>
+        <TimerProgressIndicatorBar
+          timerInitialSeconds={quizTimerSeconds}
+          remainingTimerSeconds={remainingSeconds}
         />
-        <div>{problem}</div>
-        <form
-          method="POST"
-          onSubmit={(e) => { e.preventDefault(); handleAnswerSubmit(userAnswerInput) }}
+      </div>
+      <div
+        className={clsx(
+          "flex flex-col h-full lg:flex-row gap-4",
+        )}
+      >
+        <div
+          className="lg:hidden flex flex-col"
         >
-          <AnswerInput
-            ref={answerInputRef}
-            inputMode="none"
-            maxLength={3}
-            value={userAnswerInput}
-            onKeyDown={(e) => {
-              if (e.key === "Delete") clearUserAnswerInput();
-            }}
-            onChange={(e) => setUserAnswerInput(e.target.value)}
-            disabled={isQuizPaused}
+          <div className="flex justify-between text-xs font-bold text-gray-500">
+            <div>TIME: {remainingSeconds}</div>
+            <div>SCORE: {remainingSeconds}</div>
+          </div>
+          <TimerProgressIndicatorBar
+            timerInitialSeconds={quizTimerSeconds}
+            remainingTimerSeconds={remainingSeconds}
           />
-        </form>
+        </div>
+        <div className="flex-grow lg:px-24 flex flex-col gap-6">
+          <div className="relative">
+            <TimesProblemDisplay
+              multiplicand={problem?.multiplicand}
+              multiplier={problem?.multiplier}
+            />
+            <QuizStartCountdown
+              className="absolute top-[35%] justify-center items-center w-full"
+              onEnd={handleStartTimerTimeout}
+            />
+          </div>
+          <form
+            className="self-center"
+            method="POST"
+            onSubmit={(e) => { e.preventDefault(); handleAnswerSubmit(userAnswerInput) }}
+          >
+            <AnswerInput
+              ref={answerInputRef}
+              inputMode="none"
+              maxLength={3}
+              value={userAnswerInput}
+              onKeyDown={(e) => {
+                if (e.key === "Delete") clearUserAnswerInput();
+              }}
+              onChange={(e) => setUserAnswerInput(e.target.value)}
+              disabled={isInteractionDisabled}
+            />
+          </form>
+        </div>
+        <div className="">
+          <Keypad
+            disabled={isInteractionDisabled}
+            enterDisabled={!userAnswerInput}
+            onInputNumber={(inputNumber) => { focusOnAnswerInput(); appendUserAnswerInput(inputNumber) }}
+            onEnter={() => { focusOnAnswerInput(); handleAnswerSubmit(userAnswerInput) }}
+            onBackSpace={() => backspaceUserAnswerInput()}
+            onClear={() => clearUserAnswerInput()}
+          />
+        </div>
       </div>
-      <Timer
-        countDownSeconds={3}
-        timeoutMessage="START"
-        onFinish={handleStartTimerTimeout}
-      />
-      <div className="lg:self-center">
-        <Keypad
-          disabled={isQuizPaused}
-          enterDisabled={!userAnswerInput}
-          onInputNumber={(inputNumber) => { focusOnAnswerInput(); appendUserAnswerInput(inputNumber) }}
-          onEnter={() => { focusOnAnswerInput(); handleAnswerSubmit(userAnswerInput) }}
-          onBackSpace={() => backspaceUserAnswerInput()}
-          onClear={() => clearUserAnswerInput()}
-        />
-      </div>
-    </div>
+    </div >
   );
 }
 
@@ -169,7 +207,10 @@ function generateQuiz(timesColumns: Array<number>): QuizItem {
     swapOperands();
   }
 
-  const problem: string = `${operands[0]} X ${operands[1]}`;
+  const problem: TimesProblem = {
+    multiplicand: operands[0],
+    multiplier: operands[1],
+  }
   const answer: string = String(operands[0] * operands[1]);
 
   return {

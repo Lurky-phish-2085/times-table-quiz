@@ -95,7 +95,7 @@ function TimesTableQuiz({
     <div
       className={clsx(
         "p-4 h-dvh",
-        "flex flex-col",
+        "flex flex-col lg:flex-row",
       )}
     >
       <div className="flex-grow">
@@ -127,14 +127,16 @@ function TimesTableQuiz({
         timeoutMessage="START"
         onFinish={handleStartTimerTimeout}
       />
-      <Keypad
-        disabled={isQuizPaused}
-        enterDisabled={!userAnswerInput}
-        onInputNumber={(inputNumber) => { focusOnAnswerInput(); appendUserAnswerInput(inputNumber) }}
-        onEnter={() => { focusOnAnswerInput(); handleAnswerSubmit(userAnswerInput) }}
-        onBackSpace={() => backspaceUserAnswerInput()}
-        onClear={() => clearUserAnswerInput()}
-      />
+      <div className="lg:self-center">
+        <Keypad
+          disabled={isQuizPaused}
+          enterDisabled={!userAnswerInput}
+          onInputNumber={(inputNumber) => { focusOnAnswerInput(); appendUserAnswerInput(inputNumber) }}
+          onEnter={() => { focusOnAnswerInput(); handleAnswerSubmit(userAnswerInput) }}
+          onBackSpace={() => backspaceUserAnswerInput()}
+          onClear={() => clearUserAnswerInput()}
+        />
+      </div>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { clsx } from "clsx";
-import { useEffect, type HtmlHTMLAttributes } from "react";
+import { useEffect, useState, type HtmlHTMLAttributes } from "react";
 import { useCountdown } from "usehooks-ts";
 import CountdownNumber from "../atoms/countdown-number";
 
@@ -15,13 +15,18 @@ function QuizStartCountdown({ className, onEnd }: QuizStartCountdownProps) {
     countStart: QUIZ_START_COUNTDOWN_SECONDS,
   });
 
+  const [isHidden, setIsHidden] = useState<boolean>(false);
+
   useEffect(() => startCountdown(), []);
 
   useEffect(() => {
     const isCountdownEnd = () => count === 0;
 
     if (isCountdownEnd()) {
-      onEnd();
+      setTimeout(() => {
+        setIsHidden(true);
+        onEnd();
+      }, 250);
     }
   }, [count]);
 
@@ -41,7 +46,7 @@ function QuizStartCountdown({ className, onEnd }: QuizStartCountdownProps) {
     <div
       className={clsx(
         "flex flex-row-reverse gap-4",
-        { "hidden": count === 0 },
+        { "hidden": isHidden },
         className,
       )}
     >

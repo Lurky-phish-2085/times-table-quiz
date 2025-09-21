@@ -3,14 +3,16 @@ import { FaTimes } from "react-icons/fa";
 import Surface from "./surface";
 
 type TimesProblemDisplayProps = {
-  mutiplicand: number;
-  multiplier: number;
+  multiplicand?: number;
+  multiplier?: number;
 };
 
 function TimesProblemDisplay({
-  mutiplicand,
+  multiplicand,
   multiplier
 }: TimesProblemDisplayProps) {
+  const isPropsUndefined = !multiplier || !multiplicand;
+
   return (
     <Surface
       className={clsx(
@@ -21,12 +23,13 @@ function TimesProblemDisplay({
       <div
         className={clsx(
           "flex items-center gap-4",
+          { "hidden": isPropsUndefined }
         )}
       >
         <div
           className="text-6xl font-bold"
         >
-          {mutiplicand}
+          {multiplicand}
         </div>
         <FaTimes className="text-3xl" />
         <div

@@ -40,7 +40,6 @@ function ProgressBar({
           "transition-all, duration-500",
         )}
       >
-        {innerBarWidth}
       </div>
     </div>
   );

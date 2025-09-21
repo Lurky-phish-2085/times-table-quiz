@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useCountdown } from "usehooks-ts";
 
 const MAX_INPUT_VALUE_LENGTH = 3;
 
@@ -34,5 +35,38 @@ export const useAnswerInput = (): UseAnswerInputHookType => {
     append,
     backspace,
     clear,
+  };
+}
+
+type UseQuizTimerHookType = {
+  remainingSeconds: number;
+  startCountdown: () => void;
+  stopCountdown: () => void;
+};
+
+type UseQuizTimerHookProps = {
+  countStart: number;
+  paused: boolean;
+  onEnd: () => void;
+};
+
+export const useQuizTimer = ({ countStart, paused, onEnd }: UseQuizTimerHookProps): UseQuizTimerHookType => {
+  const [
+    count,
+    { startCountdown, stopCountdown },
+  ] = useCountdown({ countStart });
+
+  useEffect(() => {
+    if (count === 0) {
+      setTimeout(() => onEnd(), 1000);
+    }
+  }, [count]);
+
+  useEffect(() => paused ? stopCountdown() : startCountdown(), [paused]);
+
+  return {
+    remainingSeconds: count,
+    startCountdown,
+    stopCountdown,
   };
 }

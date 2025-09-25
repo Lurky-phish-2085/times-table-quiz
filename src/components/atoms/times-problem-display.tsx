@@ -1,15 +1,18 @@
 import clsx from "clsx";
+import type { HtmlHTMLAttributes, PropsWithChildren } from "react";
 import { FaTimes } from "react-icons/fa";
 import Surface from "./surface";
 
 type TimesProblemDisplayProps = {
   multiplicand?: number;
   multiplier?: number;
-};
+}
+  & HtmlHTMLAttributes<HTMLDivElement>;
 
 function TimesProblemDisplay({
+  className,
   multiplicand,
-  multiplier
+  multiplier,
 }: TimesProblemDisplayProps) {
   const isPropsUndefined = !multiplier || !multiplicand;
 
@@ -18,6 +21,7 @@ function TimesProblemDisplay({
       className={clsx(
         "h-28",
         "flex justify-center items-center",
+        className,
       )}
     >
       <div
@@ -26,19 +30,21 @@ function TimesProblemDisplay({
           { "hidden": isPropsUndefined }
         )}
       >
-        <div
-          className="text-6xl font-bold"
-        >
-          {multiplicand}
-        </div>
+        <Operand>{multiplicand}</Operand>
         <FaTimes className="text-3xl" />
-        <div
-          className="text-6xl font-bold"
-        >
-          {multiplier}
-        </div>
+        <Operand>{multiplier}</Operand>
       </div>
     </Surface>
+  );
+}
+
+function Operand({ children }: PropsWithChildren) {
+  return (
+    <div
+      className="text-6xl font-bold"
+    >
+      {children}
+    </div>
   );
 }
 

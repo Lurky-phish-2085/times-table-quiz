@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useCountdown } from "usehooks-ts";
 
-const MAX_INPUT_VALUE_LENGTH = 3;
+const MAX_ANSWER_INPUT_VALUE_LENGTH = 3;
 
 type UseAnswerInputHookType = {
   inputValue: string;
@@ -15,7 +15,7 @@ export const useAnswerInput = (): UseAnswerInputHookType => {
   const [inputValue, setValue] = useState<string>("");
 
   const isNumber = (number: string) => Number.isFinite(Number(number));
-  const isInputValueMaxLength = inputValue.length === MAX_INPUT_VALUE_LENGTH;
+  const isInputValueMaxLength = inputValue.length === MAX_ANSWER_INPUT_VALUE_LENGTH;
 
   const setInputValue = (value: string) => {
     if (isInputValueMaxLength) return;
@@ -36,7 +36,9 @@ export const useAnswerInput = (): UseAnswerInputHookType => {
     backspace,
     clear,
   };
-}
+};
+
+const COUNTDOWN_END_DELAY_MS = 1000;
 
 type UseQuizTimerHookType = {
   remainingSeconds: number;
@@ -50,15 +52,21 @@ type UseQuizTimerHookProps = {
   onEnd: () => void;
 };
 
-export const useQuizTimer = ({ countStart, paused, onEnd }: UseQuizTimerHookProps): UseQuizTimerHookType => {
+export const useQuizTimer = ({
+  countStart,
+  paused,
+  onEnd,
+}: UseQuizTimerHookProps): UseQuizTimerHookType => {
   const [
     count,
     { startCountdown, stopCountdown },
   ] = useCountdown({ countStart });
 
+  const isCountDownEnd = count === 0;
+
   useEffect(() => {
-    if (count === 0) {
-      setTimeout(() => onEnd(), 1000);
+    if (isCountDownEnd) {
+      setTimeout(() => onEnd(), COUNTDOWN_END_DELAY_MS);
     }
   }, [count]);
 
@@ -69,4 +77,4 @@ export const useQuizTimer = ({ countStart, paused, onEnd }: UseQuizTimerHookProp
     startCountdown,
     stopCountdown,
   };
-}
+};

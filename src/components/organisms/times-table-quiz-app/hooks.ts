@@ -21,7 +21,7 @@ export const useAnswerInput = (): UseAnswerInputHookType => {
     if (isInputValueMaxLength) return;
 
     if (isNumber(value)) {
-      setValue(value);
+      setValue(value.trim());
     }
   };
 

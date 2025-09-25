@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import AnswerInput from "../../atoms/answer-input";
 import TimesProblemDisplay from "../../atoms/times-problem-display";
 import Keypad from "../../molecules/keypad";
+import QuizHUD from "../../molecules/quiz-hud";
 import QuizStartCountdown from "../../molecules/quiz-start-countdown";
-import TimerProgressIndicatorBar from "../../molecules/timer-progress-indicataor-bar";
 import { useAnswerInput, useQuizTimer } from "./hooks";
 import type { QuizConfiguration, QuizItem, QuizResultItem, TimesProblem } from "./types";
 
@@ -99,6 +99,7 @@ function TimesTableQuiz({
   });
 
   const problem = currentQuizItem?.problem;
+  const quizScore = quizResults.filter((q) => q.correct).length;
   const isInteractionDisabled = isQuizPaused || remainingSeconds === 0;
 
   return (
@@ -107,36 +108,24 @@ function TimesTableQuiz({
         "p-4 h-dvh flex flex-col gap-36",
       )}
     >
-      <div
-        className="max-lg:hidden flex flex-col"
-      >
-        <div className="flex justify-between text-xs font-bold text-gray-500">
-          <div>TIME: {remainingSeconds}</div>
-          <div>SCORE: {remainingSeconds}</div>
-        </div>
-        <TimerProgressIndicatorBar
-          timerInitialSeconds={quizTimerSeconds}
-          remainingTimerSeconds={remainingSeconds}
-        />
-      </div>
+      <QuizHUD
+        className="max-lg:hidden"
+        score={quizScore}
+        quizTimerSeconds={quizTimerSeconds}
+        quizTimerRemainingSeconds={remainingSeconds}
+      />
       <div
         className={clsx(
-          "flex flex-col h-full lg:flex-row gap-4",
+          "h-full flex flex-col lg:flex-row gap-4",
         )}
       >
-        <div
-          className="lg:hidden flex flex-col"
-        >
-          <div className="flex justify-between text-xs font-bold text-gray-500">
-            <div>TIME: {remainingSeconds}</div>
-            <div>SCORE: {remainingSeconds}</div>
-          </div>
-          <TimerProgressIndicatorBar
-            timerInitialSeconds={quizTimerSeconds}
-            remainingTimerSeconds={remainingSeconds}
-          />
-        </div>
-        <div className="flex-grow lg:px-24 flex flex-col gap-6">
+        <QuizHUD
+          className="lg:hidden"
+          score={quizScore}
+          quizTimerSeconds={quizTimerSeconds}
+          quizTimerRemainingSeconds={remainingSeconds}
+        />
+        <div className="lg:px-24 flex-grow flex flex-col gap-6">
           <div className="relative">
             <TimesProblemDisplay
               multiplicand={problem?.multiplicand}
@@ -150,7 +139,9 @@ function TimesTableQuiz({
           <form
             className="self-center"
             method="POST"
-            onSubmit={(e) => { e.preventDefault(); handleAnswerSubmit(userAnswerInput) }}
+            onSubmit={(e) => {
+              e.preventDefault(); handleAnswerSubmit(userAnswerInput)
+            }}
           >
             <AnswerInput
               ref={answerInputRef}
@@ -165,16 +156,20 @@ function TimesTableQuiz({
             />
           </form>
         </div>
-        <div className="">
-          <Keypad
-            disabled={isInteractionDisabled}
-            enterDisabled={!userAnswerInput}
-            onInputNumber={(inputNumber) => { focusOnAnswerInput(); appendUserAnswerInput(inputNumber) }}
-            onEnter={() => { focusOnAnswerInput(); handleAnswerSubmit(userAnswerInput) }}
-            onBackSpace={() => backspaceUserAnswerInput()}
-            onClear={() => clearUserAnswerInput()}
-          />
-        </div>
+        <Keypad
+          disabled={isInteractionDisabled}
+          enterDisabled={!userAnswerInput}
+          onInputNumber={(inputNumber) => {
+            focusOnAnswerInput();
+            appendUserAnswerInput(inputNumber)
+          }}
+          onEnter={() => {
+            focusOnAnswerInput();
+            handleAnswerSubmit(userAnswerInput)
+          }}
+          onBackSpace={() => backspaceUserAnswerInput()}
+          onClear={() => clearUserAnswerInput()}
+        />
       </div>
     </div >
   );

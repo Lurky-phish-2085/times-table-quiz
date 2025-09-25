@@ -132,7 +132,7 @@ function TimesTableQuiz({
               multiplier={problem?.multiplier}
             />
             <QuizStartCountdown
-              className="absolute top-[35%] justify-center items-center w-full"
+              className="absolute top-[35%]"
               onEnd={handleStartTimerTimeout}
             />
           </div>

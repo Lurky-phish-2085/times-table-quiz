@@ -10,19 +10,22 @@ type QuizStartCountdownProps = {
 }
   & HtmlHTMLAttributes<HTMLDivElement>;
 
-function QuizStartCountdown({ className, onEnd }: QuizStartCountdownProps) {
+function QuizStartCountdown({
+  className,
+  onEnd
+}: QuizStartCountdownProps) {
   const [count, { startCountdown }] = useCountdown({
     countStart: QUIZ_START_COUNTDOWN_SECONDS,
   });
 
   const [isHidden, setIsHidden] = useState<boolean>(false);
 
+  const isCountdownEnd = count === 0;
+
   useEffect(() => startCountdown(), []);
 
   useEffect(() => {
-    const isCountdownEnd = () => count === 0;
-
-    if (isCountdownEnd()) {
+    if (isCountdownEnd) {
       setTimeout(() => {
         setIsHidden(true);
         onEnd();
@@ -45,7 +48,9 @@ function QuizStartCountdown({ className, onEnd }: QuizStartCountdownProps) {
   return (
     <div
       className={clsx(
+        "w-full",
         "flex flex-row-reverse gap-4",
+        "justify-center items-center",
         { "hidden": isHidden },
         className,
       )}

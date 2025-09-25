@@ -17,7 +17,7 @@ function MistakeReview({ data: results, onNavigate }: MistakeReviewProps) {
       {failedQuizItems.length === 0 ? <div>NONE!!!</div> :
         failedQuizItems.map((quiz) => (
           <>
-            <div>{quiz.problem} = {quiz.userAnswer}</div>
+            <div>{quiz.problem.multiplicand} * {quiz.problem.multiplier}  = {quiz.userAnswer}</div>
             <div>WRONG! Correct answer: {quiz.answer}</div>
           </>
         ))}

@@ -127,7 +127,7 @@ function TimesTableQuiz({
           onClear={() => clearUserAnswerInput()}
         />
       </div>
-    </div >
+    </div>
   );
 }
 

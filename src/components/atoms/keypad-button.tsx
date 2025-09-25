@@ -1,5 +1,5 @@
 import { clsx } from "clsx";
-import { useState, type ButtonHTMLAttributes, type RefAttributes } from "react";
+import { useState, type ButtonHTMLAttributes, type MouseEvent, type RefAttributes } from "react";
 import { useEventListener } from "usehooks-ts";
 
 type KeypadButtonProps = {
@@ -39,6 +39,14 @@ function KeypadButton({
     useEventListener("keyup", onKeyUp);
   }
 
+  const handleOnClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    onClick?.call(undefined, e);
+
+    setIsActive(true);
+    setToInactive();
+  };
+
   return (
     <button
       tabIndex={-1}
@@ -49,12 +57,12 @@ function KeypadButton({
         "transition-colors",
         "hover:bg-primary-light",
         "active:bg-primary/80 active:border-primary/80 active:text-white",
-        { "bg-primary/80 border-primary/80 text-white": isActive },
+        { "bg-primary/80 border-primary/80 text-white hover:bg-primary/80": isActive },
         "text-center uppercase text-xl font-bold",
         className,
       )}
       ref={ref}
-      onClick={(e) => { e.preventDefault(); onClick?.call(undefined, e) }}
+      onClick={handleOnClick}
       {...props}
     >
     </button>

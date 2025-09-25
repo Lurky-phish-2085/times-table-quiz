@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useCountdown } from "usehooks-ts";
+import type { QuizConfiguration, QuizItem, QuizResultItem } from "./types";
+import { generateQuiz } from "./utils";
 
 const MAX_ANSWER_INPUT_VALUE_LENGTH = 3;
 
@@ -77,4 +79,108 @@ export const useQuizTimer = ({
     startCountdown,
     stopCountdown,
   };
+};
+
+type UseTimesTableQuizHookProps = {
+  config: QuizConfiguration;
+  onQuizFinish?: (results: Array<QuizResultItem>) => void;
+};
+
+type UseTimesTableQuizHookType = {
+  currentQuiz?: QuizItem;
+  score: number;
+  remainingTimeSeconds: number;
+  isQuizPaused: boolean;
+  answerCurrentQuiz: (answer: string) => void;
+  startQuiz: () => void;
+  pauseQuiz: () => void;
+};
+
+export const useTimesTableQuiz = ({
+  config,
+  onQuizFinish = () => { },
+}: UseTimesTableQuizHookProps): UseTimesTableQuizHookType => {
+  const { selectedTimesColumn, quizTimerSeconds } = config;
+
+  const [currentQuiz, setCurrentQuiz] = useState<QuizItem | undefined>(undefined);
+  const [quizResults, setQuizResults] = useState<Array<QuizResultItem>>([]);
+  const [isQuizPaused, setIsQuizPaused] = useState<boolean>(true);
+
+  const score: number = quizResults.map((quiz) => quiz.correct).length;
+
+  const { remainingSeconds: remainingTimeSeconds } = useQuizTimer({
+    countStart: quizTimerSeconds,
+    paused: isQuizPaused,
+    onEnd: () => onQuizFinish(quizResults),
+  });
+
+  useEffect(() => {
+    if (quizTimerSeconds === 0) {
+      setIsQuizPaused(true);
+    }
+  }, [quizTimerSeconds]);
+
+  const createNewQuiz = () => {
+    let quiz = generateQuiz(selectedTimesColumn);
+
+    const isQuizGeneratedRecently = (): boolean => {
+      const isResultsEmpty = quizResults.length === 0;
+
+      if (isResultsEmpty) return false;
+
+      const recentPreviousResult = quizResults
+        .map((result) => result.quizItem)
+        .at(-1);
+
+      return quiz.problem === recentPreviousResult?.problem;
+    };
+
+    while (isQuizGeneratedRecently()) {
+      quiz = generateQuiz(selectedTimesColumn);
+    }
+
+    setCurrentQuiz(quiz);
+  };
+
+  const evaluateQuizResult = () => {
+    if (!currentQuiz) return;
+
+    const { userAnswer, answer } = currentQuiz;
+
+    const result: QuizResultItem = {
+      quizItem: currentQuiz,
+      correct: userAnswer === answer,
+    };
+
+    setQuizResults((prev) => [...prev, result]);
+  };
+
+  const startQuiz = () => {
+    if (!currentQuiz) {
+      createNewQuiz();
+    }
+
+    setIsQuizPaused(false);
+  };
+
+  const pauseQuiz = () => setIsQuizPaused(true);
+
+  const answerCurrentQuiz = (answer: string) => {
+    if (!currentQuiz) return;
+    if (!answer) return;
+
+    currentQuiz.userAnswer = answer;
+    evaluateQuizResult();
+    createNewQuiz();
+  };
+
+  return {
+    currentQuiz,
+    score,
+    remainingTimeSeconds,
+    isQuizPaused,
+    answerCurrentQuiz,
+    startQuiz,
+    pauseQuiz,
+  }
 };

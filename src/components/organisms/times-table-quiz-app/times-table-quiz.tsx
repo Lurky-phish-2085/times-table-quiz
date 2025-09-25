@@ -1,13 +1,12 @@
 import { clsx } from "clsx";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import AnswerInput from "../../atoms/answer-input";
 import TimesProblemDisplay from "../../atoms/times-problem-display";
 import Keypad from "../../molecules/keypad";
 import QuizHUD from "../../molecules/quiz-hud";
 import QuizStartCountdown from "../../molecules/quiz-start-countdown";
-import { useAnswerInput, useQuizTimer } from "./hooks";
-import type { QuizConfiguration, QuizItem, QuizResultItem } from "./types";
-import { generateQuiz } from "./utils";
+import { useAnswerInput, useTimesTableQuiz } from "./hooks";
+import type { QuizConfiguration, QuizResultItem } from "./types";
 
 export type TimesTableQuizProps = {
   config: QuizConfiguration;
@@ -18,12 +17,19 @@ function TimesTableQuiz({
   config,
   onQuizFinish,
 }: TimesTableQuizProps) {
-  const { selectedTimesColumn, quizTimerSeconds } = config;
+  const { quizTimerSeconds } = config;
 
-  const [isQuizPaused, setIsQuizPaused] = useState<boolean>(true);
-
-  const [currentQuizItem, setCurrentQuizItem] = useState<QuizItem | null>(null);
-  const [quizResults, setQuizResults] = useState<Array<QuizResultItem>>([]);
+  const {
+    currentQuiz,
+    score,
+    remainingTimeSeconds,
+    isQuizPaused,
+    answerCurrentQuiz,
+    startQuiz,
+  } = useTimesTableQuiz({
+    config,
+    onQuizFinish: (results) => onQuizFinish(results),
+  });
 
   const {
     inputValue: userAnswerInput,
@@ -42,66 +48,14 @@ function TimesTableQuiz({
     }
   }, [isQuizPaused]);
 
-  const createNewQuiz = () => {
-    let quiz = generateQuiz(selectedTimesColumn);
-
-    const isQuizGeneratedRecently = (): boolean => {
-      const isResultsEmpty = quizResults.length === 0;
-
-      if (isResultsEmpty) return false;
-
-      const recentPreviousResult = quizResults
-        .map((result) => result.quizItem)
-        .at(-1);
-
-      return quiz.problem === recentPreviousResult?.problem;
-    };
-
-    while (isQuizGeneratedRecently()) {
-      quiz = generateQuiz(selectedTimesColumn);
-    }
-
-    setCurrentQuizItem(quiz);
-  };
-
-  const evaluateQuizResult = () => {
-    if (!currentQuizItem) return;
-
-    const { userAnswer, answer } = currentQuizItem;
-
-    const result: QuizResultItem = {
-      quizItem: currentQuizItem,
-      correct: userAnswer === answer,
-    };
-
-    setQuizResults((prev) => [...prev, result]);
-  };
-
-  const handleStartTimerTimeout = () => {
-    createNewQuiz();
-    setIsQuizPaused(false);
-  };
-
   const handleAnswerSubmit = (answer: string) => {
-    if (!currentQuizItem) return;
-    if (!answer) return;
-
     clearUserAnswerInput();
 
-    currentQuizItem.userAnswer = answer;
-    evaluateQuizResult();
-    createNewQuiz();
-  };
+    answerCurrentQuiz(answer);
+  }
 
-  const { remainingSeconds } = useQuizTimer({
-    countStart: quizTimerSeconds,
-    paused: isQuizPaused,
-    onEnd: () => onQuizFinish(quizResults),
-  });
-
-  const problem = currentQuizItem?.problem;
-  const quizScore = quizResults.filter((q) => q.correct).length;
-  const isInteractionDisabled = isQuizPaused || remainingSeconds === 0;
+  const problem = currentQuiz?.problem;
+  const isInteractionDisabled = isQuizPaused;
 
   return (
     <div
@@ -111,9 +65,9 @@ function TimesTableQuiz({
     >
       <QuizHUD
         className="max-lg:hidden"
-        score={quizScore}
+        score={score}
         quizTimerSeconds={quizTimerSeconds}
-        quizTimerRemainingSeconds={remainingSeconds}
+        quizTimerRemainingSeconds={remainingTimeSeconds}
       />
       <div
         className={clsx(
@@ -122,9 +76,9 @@ function TimesTableQuiz({
       >
         <QuizHUD
           className="lg:hidden"
-          score={quizScore}
+          score={score}
           quizTimerSeconds={quizTimerSeconds}
-          quizTimerRemainingSeconds={remainingSeconds}
+          quizTimerRemainingSeconds={remainingTimeSeconds}
         />
         <div className="lg:px-24 flex-grow flex flex-col gap-6">
           <div className="relative">
@@ -134,14 +88,15 @@ function TimesTableQuiz({
             />
             <QuizStartCountdown
               className="absolute top-[35%]"
-              onEnd={handleStartTimerTimeout}
+              onEnd={startQuiz}
             />
           </div>
           <form
             className="self-center"
             method="POST"
             onSubmit={(e) => {
-              e.preventDefault(); handleAnswerSubmit(userAnswerInput)
+              e.preventDefault();
+              handleAnswerSubmit(userAnswerInput)
             }}
           >
             <AnswerInput

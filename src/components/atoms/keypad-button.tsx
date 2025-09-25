@@ -54,7 +54,7 @@ function KeypadButton({
         className,
       )}
       ref={ref}
-      onMouseDown={(e) => { e.preventDefault(); onClick?.call(undefined, e) }}
+      onClick={(e) => { e.preventDefault(); onClick?.call(undefined, e) }}
       {...props}
     >
     </button>

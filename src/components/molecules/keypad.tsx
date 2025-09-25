@@ -16,7 +16,8 @@ type KeypadProps = {
   & HtmlHTMLAttributes<HTMLDivElement>;
 
 
-const numbers: Array<string> = Array.from({ length: 9 }, (_, i) => String(i + 1));
+const numbers: Array<string> = Array
+  .from({ length: 9 }, (_, i) => String(i + 1));
 
 function Keypad({
   disabled,

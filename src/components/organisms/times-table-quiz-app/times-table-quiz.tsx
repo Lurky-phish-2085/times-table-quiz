@@ -83,6 +83,7 @@ function TimesTableQuiz({
 
   const handleAnswerSubmit = (answer: string) => {
     if (!currentQuizItem) return;
+    if (!answer) return;
 
     clearUserAnswerInput();
 

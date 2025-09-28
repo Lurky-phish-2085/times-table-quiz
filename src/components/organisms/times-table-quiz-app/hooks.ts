@@ -100,7 +100,7 @@ export const useTimesTableQuiz = ({
   config,
   onQuizFinish = () => { },
 }: UseTimesTableQuizHookProps): UseTimesTableQuizHookType => {
-  const { selectedTimesColumn, quizTimerSeconds } = config;
+  const { selectedTimesColumns, quizTimerSeconds } = config;
 
   const [currentQuiz, setCurrentQuiz] = useState<QuizItem | undefined>(undefined);
   const [quizResults, setQuizResults] = useState<Array<QuizResultItem>>([]);
@@ -121,7 +121,7 @@ export const useTimesTableQuiz = ({
   }, [quizTimerSeconds]);
 
   const createNewQuiz = () => {
-    let quiz = generateQuiz(selectedTimesColumn);
+    let quiz = generateQuiz(selectedTimesColumns);
 
     const isQuizGeneratedRecently = (): boolean => {
       const isResultsEmpty = quizResults.length === 0;
@@ -136,7 +136,7 @@ export const useTimesTableQuiz = ({
     };
 
     while (isQuizGeneratedRecently()) {
-      quiz = generateQuiz(selectedTimesColumn);
+      quiz = generateQuiz(selectedTimesColumns);
     }
 
     setCurrentQuiz(quiz);

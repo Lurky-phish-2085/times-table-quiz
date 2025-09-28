@@ -4,7 +4,7 @@ export type TimesTableQuizAppScreenStates = "SELECTION"
   | "MISTAKES";
 
 export type QuizConfiguration = {
-  selectedTimesColumn: Array<number>;
+  selectedTimesColumns: Array<number>;
   quizTimerSeconds: number;
 };
 

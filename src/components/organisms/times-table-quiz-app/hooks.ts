@@ -106,7 +106,7 @@ export const useTimesTableQuiz = ({
   const [quizResults, setQuizResults] = useState<Array<QuizResultItem>>([]);
   const [isQuizPaused, setIsQuizPaused] = useState<boolean>(true);
 
-  const score: number = quizResults.map((quiz) => quiz.correct).length;
+  const score: number = quizResults.filter((quiz) => quiz.correct).length;
 
   const { remainingSeconds: remainingTimeSeconds } = useQuizTimer({
     countStart: quizTimerSeconds,

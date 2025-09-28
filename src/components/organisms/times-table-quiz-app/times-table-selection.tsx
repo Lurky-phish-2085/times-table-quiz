@@ -21,7 +21,17 @@ function TimesTableSelection({
         className,
       )}
     >
-      <div>Select Columns to Practice</div>
+      <h1
+        className="text-3xl font-extrabold"
+      >
+        Test your Times Tables
+      </h1>
+      <p
+        className="w-[95%] text-xl text-center font-light"
+      >
+        Have you mastered your times tables?
+        See how many you can get right within 60 seconds.
+      </p>
       <OutlineButton
         onClick={() => onSubmitInput(selectedColumns)}
       >

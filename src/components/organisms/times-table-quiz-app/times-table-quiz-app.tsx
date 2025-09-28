@@ -17,18 +17,23 @@ function TimesTableQuizApp() {
 
   if (screenState === "SELECTION") {
     return (
-      <TimesTableSelection
-        onSubmitInput={(selectedColumns) => {
-          setConfig((prev) => {
-            return {
-              ...prev,
-              selectedTimesColumns: selectedColumns,
-            };
-          });
+      <div
+        className="grid place-items-center"
+      >
+        <TimesTableSelection
+          className="w-96"
+          onSubmitInput={(selectedColumns) => {
+            setConfig((prev) => {
+              return {
+                ...prev,
+                selectedTimesColumns: selectedColumns,
+              };
+            });
 
-          setScreenState("QUIZ");
-        }}
-      />
+            setScreenState("QUIZ");
+          }}
+        />
+      </div>
     );
   }
 

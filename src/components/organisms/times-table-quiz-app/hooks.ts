@@ -17,10 +17,11 @@ export const useAnswerInput = (): UseAnswerInputHookType => {
   const [inputValue, setValue] = useState<string>("");
 
   const isNumber = (number: string) => Number.isFinite(Number(number));
-  const isInputValueMaxLength = inputValue.length === MAX_ANSWER_INPUT_VALUE_LENGTH;
 
   const setInputValue = (value: string) => {
-    if (isInputValueMaxLength) return;
+    const isNewValueReachedMaxLength = value.length > MAX_ANSWER_INPUT_VALUE_LENGTH;
+
+    if (isNewValueReachedMaxLength) return;
 
     if (isNumber(value)) {
       setValue(value.trim());

@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import type { HtmlHTMLAttributes, PropsWithChildren } from "react";
+import type { HtmlHTMLAttributes } from "react";
 import { FaTimes } from "react-icons/fa";
 import Surface from "./surface";
 
@@ -26,22 +26,39 @@ function TimesProblemDisplay({
     >
       <div
         className={clsx(
-          "flex items-center gap-4",
+          "w-full",
+          "flex justify-center items-center space-x-2 gap-4",
           { "hidden": isPropsUndefined }
         )}
       >
-        <Operand>{multiplicand}</Operand>
+        <Operand
+          className="text-right"
+        >
+          {multiplicand}
+        </Operand>
         <FaTimes className="md:text-6xl lg:text-3xl text-3xl" />
-        <Operand>{multiplier}</Operand>
+        <Operand
+          className="text-left"
+        >
+          {multiplier}
+        </Operand>
       </div>
     </Surface>
   );
 }
 
-function Operand({ children }: PropsWithChildren) {
+type OperandProps = HtmlHTMLAttributes<HTMLDivElement>;
+
+function Operand({
+  className,
+  children,
+}: OperandProps) {
   return (
     <div
-      className="md:text-9xl lg:text-6xl text-6xl font-bold"
+      className={clsx(
+        "w-[20%] md:text-9xl lg:text-6xl text-6xl font-bold",
+        className,
+      )}
     >
       {children}
     </div>

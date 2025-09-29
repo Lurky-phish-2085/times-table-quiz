@@ -31,7 +31,7 @@ function ResultMedal({
         {title}
       </h1>
       <p
-        className="text-lg"
+        className="w-80 text-lg text-center"
       >
         {subTitleMessage}
       </p>

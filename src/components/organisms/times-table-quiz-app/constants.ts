@@ -12,7 +12,7 @@ export const BRONZE_MEDAL: QuizResultMedal = {
   name: "Bronze Medal",
   title: "Keep it up",
   subTitleMessage: "Aim to get at least 15 correct. Keep practicing. " +
-    "You've got this.",
+    "You got this!",
 };
 
 export const SILVER_MEDAL: QuizResultMedal = {

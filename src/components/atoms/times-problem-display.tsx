@@ -19,7 +19,7 @@ function TimesProblemDisplay({
   return (
     <Surface
       className={clsx(
-        "h-28",
+        "lg:h-28 md:h-72 h-28",
         "flex justify-center items-center",
         className,
       )}
@@ -31,7 +31,7 @@ function TimesProblemDisplay({
         )}
       >
         <Operand>{multiplicand}</Operand>
-        <FaTimes className="text-3xl" />
+        <FaTimes className="md:text-6xl lg:text-3xl text-3xl" />
         <Operand>{multiplier}</Operand>
       </div>
     </Surface>
@@ -41,7 +41,7 @@ function TimesProblemDisplay({
 function Operand({ children }: PropsWithChildren) {
   return (
     <div
-      className="text-6xl font-bold"
+      className="md:text-9xl lg:text-6xl text-6xl font-bold"
     >
       {children}
     </div>

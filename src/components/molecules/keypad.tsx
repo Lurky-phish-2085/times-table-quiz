@@ -19,6 +19,8 @@ type KeypadProps = {
 const numbers: Array<string> = Array
   .from({ length: 9 }, (_, i) => String(i + 1));
 
+const keypadButtonsClassName = "md:h-24 md:text-5xl lg:text-xl lg:h-auto text-xl";
+
 function Keypad({
   disabled,
   enterDisabled,
@@ -42,6 +44,7 @@ function Keypad({
       >
         {numbers.map(((numberValue, index) => (
           <KeypadButton
+            className={keypadButtonsClassName}
             key={index}
             glowOnKey={numberValue}
             onClick={() => onInputNumber(numberValue)}
@@ -51,13 +54,15 @@ function Keypad({
           </KeypadButton>
         )))}
         <KeypadButton
+          className={keypadButtonsClassName}
           glowOnKey="Delete"
           onClick={onClear}
           disabled={disabled}
         >
-          <FaEraser className="text-xl mx-auto" />
+          <FaEraser className="mx-auto" />
         </KeypadButton>
         <KeypadButton
+          className={keypadButtonsClassName}
           glowOnKey="0"
           onClick={() => onInputNumber?.call(undefined, "0")}
           disabled={disabled}
@@ -65,14 +70,16 @@ function Keypad({
           0
         </KeypadButton>
         <KeypadButton
+          className={keypadButtonsClassName}
           glowOnKey="Backspace"
           onClick={onBackSpace}
           disabled={disabled}
         >
-          <FaBackspace className="text-xl mx-auto" />
+          <FaBackspace className="mx-auto" />
         </KeypadButton>
       </div>
       <FilledButton
+        className="md:h-24 sm:h-auto lg:h-auto lg:text-xl"
         onClick={onEnter}
         disabled={enterDisabled}
       >

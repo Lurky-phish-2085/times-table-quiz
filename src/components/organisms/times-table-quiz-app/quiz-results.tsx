@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { FaRotateLeft } from "react-icons/fa6";
 import FilledButton from "../../atoms/filled-button";
 import OutlineButton from "../../atoms/outline-button";
+import QuizScoreBreakdown from "../../molecules/quiz-score-breakdown";
 import ResultMedal from "../../molecules/result-medal";
 import { BRONZE_MEDAL, GOLD_MEDAL, MIN_GOLD_SCORE, MIN_SILVER_SCORE, SILVER_MEDAL } from "./constants";
 import type { QuizResultItem, TimesTableQuizAppScreenStates } from "./types";
@@ -39,10 +40,10 @@ function QuizResults({ data: results, onNavigate }: QuizResultsProps) {
       <div
         className="flex flex-col justify-center items-center gap-12"
       >
-        <div>
-          <div>Correct: {correctAnswersCount}</div>
-          <div>Wrong: {wrongAnswersCount}</div>
-        </div>
+        <QuizScoreBreakdown
+          incorrectCount={wrongAnswersCount}
+          correctCount={correctAnswersCount}
+        />
         <div
           className={clsx(
             "w-96",

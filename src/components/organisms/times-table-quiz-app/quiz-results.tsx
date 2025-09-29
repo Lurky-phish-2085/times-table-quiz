@@ -28,7 +28,7 @@ function QuizResults({ data: results, onNavigate }: QuizResultsProps) {
 
   return (
     <div
-      className="p-4 h-dvh flex flex-col justify-center items-center md:flex-row md:justify-around md:gap-0 gap-16"
+      className="overflow-x-hidden p-4 h-dvh flex flex-col justify-center items-center md:flex-row md:justify-around md:gap-0 gap-16"
     >
       <div className="flex flex-col">
         <div>
@@ -62,9 +62,9 @@ function QuizResults({ data: results, onNavigate }: QuizResultsProps) {
           </FilledButton>
           <OutlineButton
             className={clsx(
-              "py-2 border-neutral-400",
-              "hover:bg-neutral-400 hover: text-white",
-              "text-neutral-400",
+              "py-2 border-neutral-500",
+              "hover:bg-neutral-500 hover:text-white",
+              "text-neutral-500",
             )}
             onClick={() => onNavigate("SELECTION")}
           >

@@ -23,3 +23,10 @@ export type QuizResultItem = {
   quizItem: QuizItem;
   correct: boolean;
 };
+
+export type QuizResultMedal = {
+  name: string,
+  medalImage: string,
+  title: string;
+  subTitleMessage: string;
+};

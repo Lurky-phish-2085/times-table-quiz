@@ -79,7 +79,7 @@ function Keypad({
         </KeypadButton>
       </div>
       <FilledButton
-        className="md:h-24 sm:h-auto lg:h-auto lg:text-xl"
+        className="md:h-24 lg:h-auto md:text-4xl lg:text-xl"
         onClick={onEnter}
         disabled={enterDisabled}
       >

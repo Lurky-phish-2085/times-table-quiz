@@ -21,7 +21,7 @@ function TimesTableQuizApp() {
         className="grid place-items-center"
       >
         <TimesTableSelection
-          className="w-96"
+          className="md:w-96 w-full"
           onSubmitInput={(selectedColumns) => {
             setConfig((prev) => {
               return {

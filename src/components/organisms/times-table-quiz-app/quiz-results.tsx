@@ -26,17 +26,23 @@ function QuizResults({ data: results, onNavigate }: QuizResultsProps) {
   }
 
   return (
-    <div className="flex flex-col lg:flex-row justify-center">
-      <div>
-        <ResultMedal
-          {...resultMedalData}
-        />
-      </div>
+    <div
+      className="p-4 h-dvh flex flex-col gap-36"
+    >
+      <div className="flex flex-col lg:flex-row justify-center">
+        <div>
+          <ResultMedal
+            {...resultMedalData}
+          />
+        </div>
+      </div >
       <div
-        className="flex flex-col justify-center items-center"
+        className="flex flex-col justify-center items-center gap-12"
       >
-        <div>Correct: {correctAnswersCount}</div>
-        <div>Wrong: {wrongAnswersCount}</div>
+        <div>
+          <div>Correct: {correctAnswersCount}</div>
+          <div>Wrong: {wrongAnswersCount}</div>
+        </div>
         <div
           className={clsx(
             "w-96",

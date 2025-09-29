@@ -45,7 +45,7 @@ function TimesColumnSelector({
   return (
     <Surface
       className={clsx(
-        "w-96",
+        "md:w-96 w-full max-sm:rounded-none",
         "grid place-items-center gap-4",
       )}
     >

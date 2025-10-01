@@ -60,7 +60,7 @@ function TimesTableQuiz({
   return (
     <div
       className={clsx(
-        "p-4 h-dvh flex flex-col gap-36",
+        "p-4 h-full flex flex-col gap-36",
       )}
     >
       <QuizHUD

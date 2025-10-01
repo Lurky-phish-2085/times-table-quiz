@@ -1,4 +1,5 @@
-import { useState } from "react";
+import clsx from "clsx";
+import { useState, type ReactNode } from "react";
 import MistakeReview from "./mistake-review";
 import QuizResults from "./quiz-results";
 import TimesTableQuiz from "./times-table-quiz";
@@ -15,58 +16,80 @@ function TimesTableQuizApp() {
 
   const [results, setResults] = useState<Array<QuizResultItem>>([]);
 
-  if (screenState === "SELECTION") {
-    return (
-      <div
-        className="grid place-items-center"
-      >
-        <TimesTableSelection
-          className="md:w-96 w-full"
-          onSubmitInput={(selectedColumns) => {
-            setConfig((prev) => {
-              return {
-                ...prev,
-                selectedTimesColumns: selectedColumns,
-              };
-            });
+  const [isTransitionAnimating, setIsTransitionAnimating] = useState<boolean>(false);
 
-            setScreenState("QUIZ");
-          }}
-        />
-      </div>
+  const navigate = (to: TimesTableQuizAppScreenStates) => {
+    setIsTransitionAnimating(true);
+
+    setTimeout(() => {
+      setScreenState(to);
+
+      setIsTransitionAnimating(false);
+    }, 500);
+  };
+
+  let screen: ReactNode = <></>;
+
+  if (screenState === "SELECTION") {
+    screen = (
+      <TimesTableSelection
+        className="md:w-96 mx-auto pt-4"
+        onSubmitInput={(selectedColumns) => {
+          setConfig((prev) => {
+            return {
+              ...prev,
+              selectedTimesColumns: selectedColumns,
+            };
+          });
+
+          navigate("QUIZ");
+        }}
+      />
     );
   }
 
   if (screenState === "QUIZ") {
-    return (
+    screen = (
       <TimesTableQuiz
         config={config}
         onQuizFinish={(results: Array<QuizResultItem>) => {
           setResults(results);
 
-          setScreenState("RESULT");
+          navigate("RESULT");
         }}
       />
     );
   }
 
   if (screenState === "RESULT") {
-    return (
+    screen = (
       <QuizResults
         data={results}
-        onNavigate={(nextScreenState) => setScreenState(nextScreenState)}
+        onNavigate={(nextScreenState) => navigate(nextScreenState)}
       />
     );
   }
 
   if (screenState === "MISTAKES") {
-    return (
+    screen = (
       <MistakeReview
         data={results}
-        onNavigate={(nextScreenState) => setScreenState(nextScreenState)}
+        onNavigate={(nextScreenState) => navigate(nextScreenState)}
       />
     );
   }
+
+  return (
+    <div
+      className={clsx(
+        "h-dvh",
+        "transition-all duration-500",
+        { "opacity-0 scale-90": isTransitionAnimating },
+      )}
+    >
+      {screen}
+    </div>
+  );
 }
 
 export default TimesTableQuizApp;

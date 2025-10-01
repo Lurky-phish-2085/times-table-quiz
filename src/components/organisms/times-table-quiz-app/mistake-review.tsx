@@ -12,7 +12,7 @@ function MistakeReview({ data: results, onNavigate }: MistakeReviewProps) {
     .map((failedQuiz) => failedQuiz.quizItem);
 
   return (
-    <div className="flex flex-col">
+    <div className="h-full p-4 flex flex-col">
       <h1 className="text-xl">Mistakes</h1>
       {failedQuizItems.length === 0 ? <div>NONE!!!</div> :
         failedQuizItems.map((quiz) => (

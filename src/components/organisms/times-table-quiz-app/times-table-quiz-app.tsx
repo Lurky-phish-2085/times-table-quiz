@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import MistakeReview from "./mistake-review";
 import QuizResults from "./quiz-results";
 import TimesTableQuiz from "./times-table-quiz";
@@ -7,7 +7,7 @@ import TimesTableSelection from "./times-table-selection.tsx";
 import type { QuizConfiguration, QuizResultItem, TimesTableQuizAppScreenStates } from "./types";
 
 function TimesTableQuizApp() {
-  const [screenState, setScreenState] = useState<TimesTableQuizAppScreenStates>("SELECTION");
+  const [screenState, setScreenState] = useState<TimesTableQuizAppScreenStates | null>(null);
 
   const [config, setConfig] = useState<QuizConfiguration>({
     selectedTimesColumns: [],
@@ -27,6 +27,8 @@ function TimesTableQuizApp() {
       setIsTransitionAnimating(false);
     }, 500);
   };
+
+  useEffect(() => navigate("SELECTION"), []);
 
   let screen: ReactNode = <></>;
 

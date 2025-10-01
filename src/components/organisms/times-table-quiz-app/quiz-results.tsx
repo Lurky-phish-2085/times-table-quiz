@@ -28,15 +28,11 @@ function QuizResults({ data: results, onNavigate }: QuizResultsProps) {
 
   return (
     <div
-      className="overflow-x-hidden p-4 h-dvh flex flex-col justify-center items-center md:flex-row md:justify-around md:gap-0 gap-16"
+      className="max-sm:overflow-x-hidden p-4 h-dvh flex flex-col justify-center items-center md:flex-row md:justify-around md:gap-0 gap-16"
     >
-      <div className="flex flex-col">
-        <div>
-          <ResultMedal
-            {...resultMedalData}
-          />
-        </div>
-      </div >
+      <ResultMedal
+        {...resultMedalData}
+      />
       <div
         className="flex flex-col justify-center items-center gap-12"
       >

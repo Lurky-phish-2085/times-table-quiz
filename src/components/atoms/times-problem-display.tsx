@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import type { HtmlHTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 import { FaTimes } from "react-icons/fa";
 import Surface from "./surface";
 
@@ -7,7 +7,7 @@ type TimesProblemDisplayProps = {
   multiplicand?: number;
   multiplier?: number;
 }
-  & HtmlHTMLAttributes<HTMLDivElement>;
+  & HTMLAttributes<HTMLDivElement>;
 
 function TimesProblemDisplay({
   className,
@@ -47,7 +47,7 @@ function TimesProblemDisplay({
   );
 }
 
-type OperandProps = HtmlHTMLAttributes<HTMLDivElement>;
+type OperandProps = HTMLAttributes<HTMLDivElement>;
 
 function Operand({
   className,

@@ -1,7 +1,7 @@
 import clsx from "clsx";
-import type { HtmlHTMLAttributes, RefAttributes } from "react";
+import type { HTMLAttributes, RefAttributes } from "react";
 
-type SurfaceProps = HtmlHTMLAttributes<HTMLDivElement>
+type SurfaceProps = HTMLAttributes<HTMLDivElement>
   & RefAttributes<HTMLDivElement>;
 
 function Surface({

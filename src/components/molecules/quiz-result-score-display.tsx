@@ -1,12 +1,12 @@
 import clsx from "clsx";
-import type { HtmlHTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 import Surface from "../atoms/surface";
 
 type QuizResultScoreCountDisplayProps = {
   heading: string,
   value: number,
 }
-  & HtmlHTMLAttributes<HTMLDivElement>;
+  & HTMLAttributes<HTMLDivElement>;
 
 function QuizResultScoreCountDisplay({
   className,

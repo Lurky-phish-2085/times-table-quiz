@@ -1,9 +1,9 @@
 import clsx from "clsx";
-import type { HtmlHTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 import type { QuizResultMedal } from "../organisms/times-table-quiz-app/types";
 
 type ResultMedalProps = QuizResultMedal
-  & HtmlHTMLAttributes<HTMLDivElement>;
+  & HTMLAttributes<HTMLDivElement>;
 
 function ResultMedal({
   className,

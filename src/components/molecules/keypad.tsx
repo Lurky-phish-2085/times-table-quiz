@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { type HtmlHTMLAttributes, type RefAttributes } from "react";
+import { type HTMLAttributes, type RefAttributes } from "react";
 import { FaBackspace, FaEraser } from "react-icons/fa";
 import Button from "../atoms/button";
 import KeypadButton from "../atoms/keypad-button";
@@ -13,7 +13,7 @@ type KeypadProps = {
   onClear?: () => void;
 }
   & RefAttributes<HTMLDivElement>
-  & HtmlHTMLAttributes<HTMLDivElement>;
+  & HTMLAttributes<HTMLDivElement>;
 
 
 const numbers: Array<string> = Array

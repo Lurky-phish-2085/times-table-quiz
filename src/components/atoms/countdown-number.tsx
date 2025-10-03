@@ -1,10 +1,10 @@
 import clsx from "clsx";
-import type { HtmlHTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 
 type CountdownNumberProps = {
   value: number;
 }
-  & HtmlHTMLAttributes<HTMLDivElement>;
+  & HTMLAttributes<HTMLDivElement>;
 
 function CountdownNumber({ className, value }: CountdownNumberProps) {
   return (

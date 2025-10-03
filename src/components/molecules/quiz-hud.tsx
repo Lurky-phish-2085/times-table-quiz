@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import type { HtmlHTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 import TimerProgressIndicatorBar from "./timer-progress-indicataor-bar";
 
 type QuizHUDProps = {
@@ -7,7 +7,7 @@ type QuizHUDProps = {
   quizTimerSeconds: number;
   quizTimerRemainingSeconds: number;
 }
-  & HtmlHTMLAttributes<HTMLDivElement>;
+  & HTMLAttributes<HTMLDivElement>;
 
 function QuizHUD({
   className,

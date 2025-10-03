@@ -1,12 +1,12 @@
 import clsx from "clsx";
-import { useState, type HtmlHTMLAttributes } from "react";
+import { useState, type HTMLAttributes } from "react";
 import Button from "../../atoms/button";
 import TimesColumnSelector from "../../molecules/times-column-selector";
 
 type TimesTableSelectionProps = {
   onSubmitInput: (selectedTimesColumn: Array<number>) => void;
 }
-  & HtmlHTMLAttributes<HTMLDivElement>;
+  & HTMLAttributes<HTMLDivElement>;
 
 function TimesTableSelection({
   onSubmitInput,

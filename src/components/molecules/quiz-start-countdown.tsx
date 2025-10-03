@@ -1,5 +1,5 @@
 import { clsx } from "clsx";
-import { useEffect, useState, type HtmlHTMLAttributes } from "react";
+import { useEffect, useState, type HTMLAttributes } from "react";
 import { useCountdown } from "usehooks-ts";
 import CountdownNumber from "../atoms/countdown-number";
 
@@ -8,7 +8,7 @@ const QUIZ_START_COUNTDOWN_SECONDS = 3;
 type QuizStartCountdownProps = {
   onEnd: () => void;
 }
-  & HtmlHTMLAttributes<HTMLDivElement>;
+  & HTMLAttributes<HTMLDivElement>;
 
 function QuizStartCountdown({
   className,

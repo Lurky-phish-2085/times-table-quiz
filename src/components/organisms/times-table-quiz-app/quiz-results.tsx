@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { FaRotateLeft } from "react-icons/fa6";
-import FilledButton from "../../atoms/filled-button";
-import OutlineButton from "../../atoms/outline-button";
+import Button from "../../atoms/button";
 import QuizScoreBreakdown from "../../molecules/quiz-score-breakdown";
 import ResultMedal from "../../molecules/result-medal";
 import { BRONZE_MEDAL, GOLD_MEDAL, MIN_GOLD_SCORE, MIN_SILVER_SCORE, SILVER_MEDAL } from "./constants";
@@ -46,27 +45,26 @@ function QuizResults({ data: results, onNavigate }: QuizResultsProps) {
             "flex flex-wrap justify-center items-center gap-4",
           )}
         >
-          <OutlineButton
+          <Button
+            variant="outline-primary"
             onClick={() => onNavigate("MISTAKES")}
           >
             View Mistakes
-          </OutlineButton>
-          <FilledButton
+          </Button>
+          <Button
+            variant="filled-primary"
             onClick={() => onNavigate("QUIZ")}
           >
             Play Again
-          </FilledButton>
-          <OutlineButton
-            className={clsx(
-              "py-2 border-neutral-500",
-              "hover:bg-neutral-500 hover:text-white",
-              "text-neutral-500",
-            )}
+          </Button>
+          <Button
+            className="text-sm py-3"
+            variant="outline-neutral"
             onClick={() => onNavigate("SELECTION")}
           >
             <FaRotateLeft className="inline-block mr-2" />
             <span>Change Selection</span>
-          </OutlineButton>
+          </Button>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { useState, type HtmlHTMLAttributes } from "react";
-import OutlineButton from "../../atoms/outline-button";
+import Button from "../../atoms/button";
 import TimesColumnSelector from "../../molecules/times-column-selector";
 
 type TimesTableSelectionProps = {
@@ -32,11 +32,12 @@ function TimesTableSelection({
         Have you mastered your times tables?
         See how many you can get right within 60 seconds.
       </p>
-      <OutlineButton
+      <Button
+        variant="outline-primary"
         onClick={() => onSubmitInput(selectedColumns)}
       >
         Start Now
-      </OutlineButton>
+      </Button>
       <TimesColumnSelector
         onSelect={(columns) => setSelectedColumns(columns)}
       />

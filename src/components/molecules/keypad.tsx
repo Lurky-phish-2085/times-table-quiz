@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { type HtmlHTMLAttributes, type RefAttributes } from "react";
 import { FaBackspace, FaEraser } from "react-icons/fa";
-import FilledButton from "../atoms/filled-button";
+import Button from "../atoms/button";
 import KeypadButton from "../atoms/keypad-button";
 
 type KeypadProps = {
@@ -78,13 +78,13 @@ function Keypad({
           <FaBackspace className="mx-auto" />
         </KeypadButton>
       </div>
-      <FilledButton
-        className="md:h-24 lg:h-auto md:text-4xl lg:text-xl"
+      <Button
+        variant="filled-primary"
         onClick={onEnter}
         disabled={enterDisabled}
       >
         Submit Answer
-      </FilledButton>
+      </Button>
     </div>
   );
 }

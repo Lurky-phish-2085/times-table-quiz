@@ -1,4 +1,4 @@
-
+import Button from "../../atoms/button";
 import type { QuizResultItem, TimesTableQuizAppScreenStates } from "./types";
 
 type MistakeReviewProps = {
@@ -21,10 +21,12 @@ function MistakeReview({ data: results, onNavigate }: MistakeReviewProps) {
             <div>WRONG! Correct answer: {quiz.answer}</div>
           </>
         ))}
-      <button
-        className="border-2 border-red-500 px-8 py-4 rounded-3xl text-red-500 font-bold text-xl hover:bg-red-500 hover:text-white transition-colors"
+      <Button
+        variant="outline-primary"
         onClick={() => onNavigate("RESULT")}
-      >Back</button>
+      >
+        Back
+      </Button>
     </div>
   );
 }

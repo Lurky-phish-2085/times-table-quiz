@@ -35,7 +35,7 @@ function TimesTableQuizApp() {
   if (screenState === "SELECTION") {
     screen = (
       <TimesTableSelection
-        className="md:w-96 mx-auto pt-4"
+        className="md:w-[90%] mx-auto pt-4"
         onSubmitInput={(selectedColumns) => {
           setConfig((prev) => {
             return {

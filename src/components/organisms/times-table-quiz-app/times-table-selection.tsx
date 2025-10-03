@@ -27,7 +27,7 @@ function TimesTableSelection({
         Test your Times Tables
       </h1>
       <p
-        className="w-[95%] text-xl text-center font-light"
+        className="md:w-[50%] w-[95%] text-xl text-center font-light"
       >
         Have you mastered your times tables?
         See how many you can get right within 60 seconds.

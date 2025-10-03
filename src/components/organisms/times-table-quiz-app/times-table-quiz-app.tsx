@@ -75,6 +75,7 @@ function TimesTableQuizApp() {
   if (screenState === "MISTAKES") {
     screen = (
       <MistakeReview
+        className="md:w-[90%] mx-auto pt-4"
         data={results}
         onNavigate={(nextScreenState) => navigate(nextScreenState)}
       />

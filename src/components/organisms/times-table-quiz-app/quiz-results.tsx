@@ -58,7 +58,7 @@ function QuizResults({ data: results, onNavigate }: QuizResultsProps) {
             Play Again
           </Button>
           <Button
-            className="text-sm py-3"
+            className="py-2 px-3 text-xs uppercase"
             variant="outline-neutral"
             onClick={() => onNavigate("SELECTION")}
           >

@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState, type HTMLAttributes, type ReactNode } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import Header from "../header.tsx";
 import MistakeReview from "./mistake-review";
@@ -8,7 +8,11 @@ import TimesTableQuiz from "./times-table-quiz";
 import TimesTableSelection from "./times-table-selection.tsx";
 import type { QuizConfiguration, QuizResultItem, TimesTableQuizAppScreenStates } from "./types";
 
-function TimesTableQuizApp() {
+type TimesTableQuizAppProps = HTMLAttributes<HTMLDivElement>;
+
+function TimesTableQuizApp({
+  className,
+}: TimesTableQuizAppProps) {
   const [screenState, setScreenState] = useState<TimesTableQuizAppScreenStates | null>(null);
 
   const [config, setConfig] = useState<QuizConfiguration>({
@@ -88,13 +92,19 @@ function TimesTableQuizApp() {
   const isHeaderHidden = screenState === "QUIZ" && !isScreenLarge;
 
   return (
-    <>
+    <div
+      className={clsx(
+        "h-dvh",
+        "transition-colors",
+        className,
+      )}
+    >
       <Header
         hidden={isHeaderHidden}
       />
       <div
         className={clsx(
-          "h-dvh",
+          "h-full",
           { "mt-20": !isHeaderHidden },
           "transition-all duration-500",
           { "opacity-0 scale-90": isTransitionAnimating },
@@ -102,7 +112,7 @@ function TimesTableQuizApp() {
       >
         {screen}
       </div>
-    </>
+    </div>
   );
 }
 

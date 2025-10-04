@@ -51,11 +51,21 @@ const ICON_OUTLINE_NEUTRAL_BUTTON_STYLES: string = clsx(
   NEUTRAL_COLOR_STYLES,
 );
 
+const ICON_GHOST_BUTTON_STYLES: string = clsx(
+  ICON_BUTTON_BOX_STYLE,
+  "rounded-full",
+  "transition-colors",
+  "bg-transparent",
+  "hover:bg-neutral-100",
+  "disabled:opacity-45",
+);
+
 type ButtonVariants =
   "filled-primary"
   | "outline-primary"
   | "outline-neutral"
-  | "icon-outline-neutral";
+  | "icon-outline-neutral"
+  | "icon-ghost";
 
 
 type ButtonProps = {
@@ -84,6 +94,9 @@ function Button({
       break;
     case "icon-outline-neutral":
       styles = ICON_OUTLINE_NEUTRAL_BUTTON_STYLES;
+      break;
+    case "icon-ghost":
+      styles = ICON_GHOST_BUTTON_STYLES;
       break;
   }
 

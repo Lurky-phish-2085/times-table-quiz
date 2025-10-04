@@ -46,6 +46,7 @@ function TimesColumnSelector({
     <Surface
       className={clsx(
         "md:w-96 w-full max-sm:rounded-none",
+        "dark:border-neutral-dark dark:max-sm:border-none",
         "grid place-items-center gap-4",
       )}
     >
@@ -86,11 +87,12 @@ function SelectAllColumnsCheckbox({
         {...props}
       />
       <div className={clsx(
-        "py-4 px-8 border-2 border-gray-800 rounded-full",
-        "text-gray-800 text-center font-bold",
+        "py-4 px-8 border-2 border-black dark:border-white rounded-full",
+        "text-center font-bold",
         "transition-colors",
         "flex flex-col items-center justify-center",
-        "peer-checked:bg-gray-950 peer-checked:text-white",
+        "peer-checked:bg-black peer-checked:text-white",
+        "dark:peer-checked:bg-white dark:peer-checked:text-black",
       )}
       >
         1 - 12

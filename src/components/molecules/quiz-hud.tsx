@@ -22,7 +22,7 @@ function QuizHUD({
         className,
       )}
     >
-      <div className="flex justify-between text-xs font-bold text-gray-500">
+      <div className="flex justify-between text-xs font-bold text-neutral dark:text-inherit">
         <div>TIME: {quizTimerRemainingSeconds}</div>
         <div>SCORE: {score}</div>
       </div>

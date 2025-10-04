@@ -20,7 +20,7 @@ function Header({
       className={clsx(
         "w-full py-2 px-4",
         "fixed top-0 left-0",
-        "bg-white shadow",
+        "bg-inherit shadow dark:shadow-none",
         "transition-transform duration-300",
         { "-translate-y-full": isHidden },
         { "translate-y-0": !isHidden },

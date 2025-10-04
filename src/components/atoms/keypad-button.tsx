@@ -52,12 +52,14 @@ function KeypadButton({
       tabIndex={-1}
       className={clsx(
         "border-2 rounded-2xl",
-        "bg-neutral-100",
-        "py-3.5 px-10 border rounded-md",
+        "bg-surface",
+        { "dark:bg-surface-dark": !isActive },
+        "py-3.5 px-10 border dark:border-neutral rounded-md",
         "transition-colors",
-        "hover:bg-primary-light",
+        "hover:bg-primary-light dark:hover:bg-primary-dark",
         "active:bg-primary/80 active:border-primary/80 active:text-white",
-        { "bg-primary/80 border-primary/80 text-white hover:bg-primary/80": isActive },
+        "dark:active:bg-primary dark:active:border-primary dark:active:text-white",
+        { "dark:bg-primary dark:border-primary dark:text-white dark:hover:bg-primary": isActive },
         "text-center uppercase text-xl font-bold",
         className,
       )}

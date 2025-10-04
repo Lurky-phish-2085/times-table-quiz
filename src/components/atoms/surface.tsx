@@ -13,8 +13,8 @@ function Surface({
     <div
       className={clsx(
         "py-8",
-        "border-2 rounded-2xl",
-        "bg-neutral-100",
+        "border-2 rounded-2xl dark:border-neutral",
+        "bg-surface dark:bg-surface-dark",
         className,
       )}
       {...props}

@@ -29,7 +29,7 @@ function ProgressBar({
       className={clsx(
         "h-[0.2rem]",
         "border rounded-full",
-        "bg-neutral-100",
+        "bg-neutral-light dark:bg-neutral-dark dark:border-background-dark",
       )}
     >
       <div

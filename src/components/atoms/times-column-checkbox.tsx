@@ -17,11 +17,12 @@ function TimesColumnCheckbox({
       />
       <div
         className={clsx(
-          "w-full h-full border-2 border-gray-800 rounded-full",
-          "text-gray-800 text-center text-sm font-bold",
+          "w-full h-full border-2 border-black dark:border-white rounded-full",
+          "text-center text-sm font-bold",
           "transition-colors",
           "flex flex-col items-center justify-center",
-          "peer-checked:bg-gray-950 peer-checked:text-white",
+          "peer-checked:bg-black peer-checked:text-white",
+          "dark:peer-checked:bg-neutral-light dark:peer-checked:text-black",
         )}
       >
         {value}

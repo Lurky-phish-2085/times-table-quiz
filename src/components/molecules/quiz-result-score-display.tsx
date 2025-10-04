@@ -24,7 +24,7 @@ function QuizResultScoreCountDisplay({
     >
       <div>{heading}</div>
       <Surface
-        className="text-2xl rounded-3xl text-black"
+        className="text-2xl rounded-3xl text-black dark:text-white"
       >
         {value}
       </Surface>

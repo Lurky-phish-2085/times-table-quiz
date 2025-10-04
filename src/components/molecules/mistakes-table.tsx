@@ -20,7 +20,7 @@ function MistakesTable({
       {...props}
     >
       <thead
-        className="border border-transparent border-b-neutral-500 text-xs font-black"
+        className="border border-transparent border-b-neutral text-xs font-black"
       >
         <tr>
           <th
@@ -34,7 +34,7 @@ function MistakesTable({
             Your Answer
           </th>
           <th
-            className="text-green-600 px-4 py-2 w-1/3"
+            className="text-text-green dark:text-text-green-light px-4 py-2 w-1/3"
           >
             Correct Answer
           </th>

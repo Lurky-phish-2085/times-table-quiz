@@ -22,7 +22,7 @@ function QuizScoreBreakdown({
         value={incorrectCount}
       />
       <QuizResultScoreCountDisplay
-        className="text-green-600"
+        className="text-text-green dark:text-text-green-light"
         heading="Correct"
         value={correctCount}
       />

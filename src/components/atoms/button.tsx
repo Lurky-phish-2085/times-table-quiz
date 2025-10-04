@@ -2,9 +2,9 @@ import clsx from "clsx";
 import type { ButtonHTMLAttributes, RefAttributes } from "react";
 
 const NEUTRAL_COLOR_STYLES: string = clsx(
-  "border-neutral-400",
-  "text-neutral-400",
-  "hover:bg-neutral-400 hover:text-white",
+  "border-neutral",
+  "text-neutral",
+  "hover:bg-neutral hover:text-white",
 );
 
 const BUTTON_BOX_STYLE: string = clsx(
@@ -56,7 +56,7 @@ const ICON_GHOST_BUTTON_STYLES: string = clsx(
   "rounded-full",
   "transition-colors",
   "bg-transparent",
-  "hover:bg-neutral-100",
+  "hover:bg-neutral-light dark:hover:bg-neutral-dark",
   "disabled:opacity-45",
 );
 

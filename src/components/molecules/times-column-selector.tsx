@@ -52,6 +52,7 @@ function TimesColumnSelector({
       <div className="grid place-items-center gap-4 md:flex">
         <SelectAllColumnsCheckbox
           onClick={selectAllColumns}
+          onChange={() => { }}
           checked={isAllSelected}
         />
         <div>Or select specific ones:</div>
@@ -59,8 +60,9 @@ function TimesColumnSelector({
       <div
         className="grid grid-cols-6 place-items-center gap-x-0.5 gap-y-1 px-8 w-full"
       >
-        {timesColumns.map((timesColumn) => (
+        {timesColumns.map((timesColumn, index) => (
           <TimesColumnCheckbox
+            key={index}
             name={`${timesColumn} times column`}
             value={timesColumn}
             onChange={handleSelect}

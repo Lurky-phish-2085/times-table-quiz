@@ -36,8 +36,9 @@ function QuizStartCountdown({
   const countdownNumbers = Array.from({
     length: QUIZ_START_COUNTDOWN_SECONDS
   }, (_, i) => i + 1)
-    .map((value) => (
+    .map((value, index) => (
       <CountdownNumber
+        key={index}
         className={clsx(
           { "scale-0": count < value },
         )}

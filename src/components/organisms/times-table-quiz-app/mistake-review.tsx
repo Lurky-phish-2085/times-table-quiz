@@ -51,7 +51,7 @@ function MistakeReview({
           </h1>
         </div>
         <p
-          className="w-96 self-center text-center text-xl"
+          className="md:w-96 w-[90%] self-center text-center text-xl"
         >
           It's a good idea to write these out. We suggest
           3 times for each one.

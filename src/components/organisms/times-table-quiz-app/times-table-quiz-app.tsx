@@ -1,5 +1,7 @@
 import clsx from "clsx";
 import { useEffect, useState, type ReactNode } from "react";
+import { useMediaQuery } from "usehooks-ts";
+import Header from "../header.tsx";
 import MistakeReview from "./mistake-review";
 import QuizResults from "./quiz-results";
 import TimesTableQuiz from "./times-table-quiz";
@@ -82,16 +84,25 @@ function TimesTableQuizApp() {
     );
   }
 
+  const isScreenLarge = useMediaQuery("(min-width: 1024px)");
+  const isHeaderHidden = screenState === "QUIZ" && !isScreenLarge;
+
   return (
-    <div
-      className={clsx(
-        "h-dvh",
-        "transition-all duration-500",
-        { "opacity-0 scale-90": isTransitionAnimating },
-      )}
-    >
-      {screen}
-    </div>
+    <>
+      <Header
+        hidden={isHeaderHidden}
+      />
+      <div
+        className={clsx(
+          "h-dvh",
+          { "mt-20": !isHeaderHidden },
+          "transition-all duration-500",
+          { "opacity-0 scale-90": isTransitionAnimating },
+        )}
+      >
+        {screen}
+      </div>
+    </>
   );
 }
 

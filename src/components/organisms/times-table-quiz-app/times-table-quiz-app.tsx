@@ -95,7 +95,6 @@ function TimesTableQuizApp({
     <div
       className={clsx(
         "h-dvh",
-        "transition-colors",
         className,
       )}
     >

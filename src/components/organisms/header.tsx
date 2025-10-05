@@ -1,9 +1,10 @@
 import clsx from "clsx";
 import type { HTMLAttributes } from "react";
-import { FaInfoCircle, FaMoon } from "react-icons/fa";
+import { FaInfoCircle } from "react-icons/fa";
 import { useScrollDirection } from "../../hooks/use-scroll-direction";
 import AppLogo from "../atoms/app-logo";
 import Button from "../atoms/button";
+import ThemeToggle from "../molecules/theme-toggle";
 
 type HeaderProps = HTMLAttributes<HTMLElement>;
 
@@ -37,11 +38,7 @@ function Header({
         >
           <AppLogo />
         </a>
-        <Button
-          variant="icon-ghost"
-        >
-          <FaMoon />
-        </Button>
+        <ThemeToggle />
         <Button
           variant="icon-ghost"
         >

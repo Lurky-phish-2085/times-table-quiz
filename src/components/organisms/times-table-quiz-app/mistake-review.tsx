@@ -20,8 +20,6 @@ function MistakeReview({
     .filter((result) => !result.correct)
     .map((failedQuiz) => failedQuiz.quizItem);
 
-  const isFailedQuizItemsEmpty = failedQuizItems.length === 0;
-
   return (
     <div
       className={clsx(
@@ -56,14 +54,9 @@ function MistakeReview({
           It's a good idea to write these out. We suggest
           3 times for each one.
         </p>
-        {isFailedQuizItemsEmpty ? (
-          <></>
-        ) : (
-          <MistakesTable
-            data={failedQuizItems}
-          />
-        )
-        }
+        <MistakesTable
+          data={failedQuizItems}
+        />
       </div>
     </div>
   );

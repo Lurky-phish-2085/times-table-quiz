@@ -116,10 +116,22 @@ export const useTimesTableQuiz = ({
   });
 
   useEffect(() => {
-    if (quizTimerSeconds === 0) {
+    const isQuizTimerEnd = quizTimerSeconds === 0;
+
+    if (isQuizTimerEnd) {
       setIsQuizPaused(true);
     }
   }, [quizTimerSeconds]);
+
+  useEffect(() => {
+    const isQuizResultsEmpty = quizResults.length === 0;
+
+    if (isQuizResultsEmpty) return;
+
+    createNewQuiz();
+
+  }, [quizResults.length]);
+
 
   const createNewQuiz = () => {
     let quiz = generateQuiz(selectedTimesColumns);
@@ -133,7 +145,8 @@ export const useTimesTableQuiz = ({
         .map((result) => result.quizItem)
         .at(-1);
 
-      return quiz.problem === recentPreviousResult?.problem;
+      return quiz.problem.multiplicand === recentPreviousResult?.problem.multiplicand &&
+        quiz.problem.multiplier === recentPreviousResult?.problem.multiplier
     };
 
     while (isQuizGeneratedRecently()) {
@@ -172,7 +185,6 @@ export const useTimesTableQuiz = ({
 
     currentQuiz.userAnswer = answer;
     evaluateQuizResult();
-    createNewQuiz();
   };
 
   return {

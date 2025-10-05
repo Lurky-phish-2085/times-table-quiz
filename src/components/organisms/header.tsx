@@ -31,7 +31,12 @@ function Header({
       <div
         className="flex items-center"
       >
-        <AppLogo className="mr-auto" />
+        <a
+          className="mr-auto"
+          href="/"
+        >
+          <AppLogo />
+        </a>
         <Button
           variant="icon-ghost"
         >

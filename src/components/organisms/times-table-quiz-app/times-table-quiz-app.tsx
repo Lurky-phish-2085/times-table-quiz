@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import { useEffect, useState, type HTMLAttributes, type ReactNode } from "react";
-import { useMediaQuery } from "usehooks-ts";
 import Header from "../header.tsx";
 import MistakeReview from "./mistake-review";
 import QuizResults from "./quiz-results";
@@ -88,9 +87,6 @@ function TimesTableQuizApp({
     );
   }
 
-  const isScreenLarge = useMediaQuery("(min-width: 1024px)");
-  const isHeaderHidden = screenState === "QUIZ" && !isScreenLarge;
-
   return (
     <div
       className={clsx(
@@ -98,14 +94,13 @@ function TimesTableQuizApp({
         className,
       )}
     >
-      <Header
-        hidden={isHeaderHidden}
-      />
-      <div className="h-20" hidden={isHeaderHidden}></div>
+      <Header />
+      <div className="mb-16"></div>
       <div
         className={clsx(
           "h-full",
           "transition-all duration-500",
+          "flex-grow",
           { "opacity-0 scale-90": isTransitionAnimating },
         )}
       >

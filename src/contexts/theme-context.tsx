@@ -11,15 +11,10 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider = ({ children }: PropsWithChildren) => {
-  const [
-    themeSetting,
-    setThemeSetting,
-  ] = useLocalStorage<Theme | null>(
+  const [themeSetting, setThemeSetting,] = useLocalStorage<Theme | null>(
     "custom-theme-setting",
     null,
-    {
-      initializeWithValue: false,
-    }
+    { initializeWithValue: false },
   );
 
   const isSystemPrefersDark = useMediaQuery("(prefers-color-scheme: dark)");

@@ -34,6 +34,16 @@ function TimesTableQuizApp({
   };
 
   useEffect(() => navigate("SELECTION"), []);
+  useEffect(() => {
+    const scrollStepSize = screenState !== "QUIZ" ? -500 : 500;
+
+    setTimeout(() => {
+      window.scrollBy({
+        top: scrollStepSize,
+        behavior: "smooth",
+      })
+    }, 150)
+  }, [screenState]);
 
   let screen: ReactNode = <></>;
 

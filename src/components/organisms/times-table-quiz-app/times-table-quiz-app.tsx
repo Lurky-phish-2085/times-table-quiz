@@ -101,10 +101,10 @@ function TimesTableQuizApp({
       <Header
         hidden={isHeaderHidden}
       />
+      <div className="h-20" hidden={isHeaderHidden}></div>
       <div
         className={clsx(
           "h-full",
-          { "mt-20": !isHeaderHidden },
           "transition-all duration-500",
           { "opacity-0 scale-90": isTransitionAnimating },
         )}

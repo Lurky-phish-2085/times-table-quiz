@@ -1,69 +1,41 @@
-# React + TypeScript + Vite
+# Times Table Quiz
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Practice your times table.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🎯 **Customizable Practice Range** – Select any combination of multiplication columns from 1 to 12 to tailor your learning experience.
+- 🔀 **Dynamic Quiz Generator** – Get hit with randomized multiplication challenges that keep you on your toes every session.
+- ⏱️ **60-Second Speed Challenge** – Race against the clock to answer as many questions as you can before time runs out!
+- 📈 **Skill Sharpening Made Fun** – Perfect for learners who want to boost their times table mastery through fast-paced, interactive gameplay.
 
-## Expanding the ESLint configuration
+## 👨‍💻 Local Development
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Follow the steps below to set it up and run it locally.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 🛠️ Prerequisites
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+Make sure you have the following installed:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- [Node.js](https://nodejs.org/) (v22.15.1 or higher recommended)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+
+### 📦 Installation
+
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/Lurky-phish-2085/times-table-quiz
+cd times-table-quiz
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Local Dev Server
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Start the development server:
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+This will launch the app in your default browser at [localhost:5173](http://localhost:5173).

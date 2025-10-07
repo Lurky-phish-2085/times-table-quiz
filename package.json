@@ -2,7 +2,6 @@
   "name": "times-table-quiz",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://lurky-phish-2085.github.io/times-table-quiz",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",

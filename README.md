@@ -2,6 +2,11 @@
 
 Practice your times table.
 
+## Table of Contents
+- [Features](#features)
+- [Local Development](#local-development)
+- [Known Issues and Bugs](#known-issues-and-bugs)
+
 ## 🚀 Features
 
 - 🎯 **Customizable Practice Range** – Select any combination of multiplication columns from 1 to 12 to tailor your learning experience.
@@ -44,6 +49,7 @@ This will launch the app in your default browser at [localhost:5173](http://loca
 
 **NOTE:** This section outlines known issues and bugs that are currently unresolved.  
 It will be updated as fixes are implemented or new issues are discovered.  
+
 Please refer to this list for the latest status, especially if you're testing or contributing to the app.
 
 - [Firefox Android Auto scroll page issue](#firefox-android-auto-scroll-page-issue)

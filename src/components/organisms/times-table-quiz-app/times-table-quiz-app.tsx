@@ -105,7 +105,7 @@ function TimesTableQuizApp({
       )}
     >
       <Header />
-      <div className="mb-16"></div>
+      <div className="mb-24"></div>
       <div
         className={clsx(
           "h-full",

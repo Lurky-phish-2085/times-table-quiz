@@ -2,10 +2,15 @@
 
 Practice your times table.
 
-# Table of Contents
-- [Features](#features)
-- [Local Development](#local-development)
-- [Known Issues and Bugs](#known-issues-and-bugs)
+- [Times Table Quiz](#times-table-quiz)
+  * [🚀 Features](#---features)
+  * [👨‍💻 Local Development](#------local-development)
+    + [🛠️ Prerequisites](#----prerequisites)
+    + [📦 Installation](#---installation)
+    + [Local Dev Server](#local-dev-server)
+  * [🐞 Known Issues and Bugs](#---known-issues-and-bugs)
+    + [Firefox Android Auto scroll page issue](#firefox-android-auto-scroll-page-issue)
+
 
 ## 🚀 Features
 

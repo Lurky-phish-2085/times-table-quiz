@@ -2,7 +2,7 @@
 
 Practice your times table.
 
-## Table of Contents
+<h2>Table of Contents</h2>
 
 - [Times Table Quiz](#times-table-quiz)
   * [🚀 Features](#---features)
@@ -12,7 +12,6 @@ Practice your times table.
     + [Local Dev Server](#local-dev-server)
   * [🐞 Known Issues and Bugs](#---known-issues-and-bugs)
     + [Firefox Android Auto scroll page issue](#firefox-android-auto-scroll-page-issue)
-
 
 ## 🚀 Features
 

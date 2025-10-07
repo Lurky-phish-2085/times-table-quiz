@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import type { HTMLAttributes } from "react";
 import { FaInfoCircle } from "react-icons/fa";
+import { ROOT_URL } from "../../constants";
 import { useScrollDirection } from "../../hooks/use-scroll-direction";
 import AppLogo from "../atoms/app-logo";
 import Button from "../atoms/button";
@@ -34,7 +35,7 @@ function Header({
       >
         <a
           className="mr-auto"
-          href="/"
+          href={ROOT_URL}
         >
           <AppLogo />
         </a>

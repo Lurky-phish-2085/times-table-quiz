@@ -39,3 +39,16 @@ npm run dev
 ```
 
 This will launch the app in your default browser at [localhost:5173](http://localhost:5173).
+
+## 🐞 Known Issues and Bugs
+
+**NOTE:** This section outlines known issues and bugs that are currently unresolved.  
+It will be updated as fixes are implemented or new issues are discovered.  
+Please refer to this list for the latest status, especially if you're testing or contributing to the app.
+
+- [Firefox Android Auto scroll page issue](#firefox-android-auto-scroll-page-issue)
+
+### Firefox Android Auto scroll page issue
+
+In Firefox Android, if the `Scroll to hide toolbar` setting is enabled which is found at `Settings -> Customize -> Gestures`, the auto scroll feature of the app will only scroll a little bit instead of scrolling to the most bottom or top of the screen.
+

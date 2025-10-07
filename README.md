@@ -2,17 +2,6 @@
 
 Practice your times table.
 
-## Table of Contents
-
-- [Times Table Quiz](#times-table-quiz)
-  * [🚀 Features](#features)
-  * [👨‍💻 Local Development](#local-development)
-    + [🛠️ Prerequisites](#prerequisites)
-    + [📦 Installation](#installation)
-    + [Local Dev Server](#local-dev-server)
-  * [🐞 Known Issues and Bugs](#known-issues-and-bugs)
-    + [Firefox Android Auto scroll page issue](#firefox-android-auto-scroll-page-issue)
-
 ## 🚀 Features
 
 - 🎯 **Customizable Practice Range** – Select any combination of multiplication columns from 1 to 12 to tailor your learning experience.

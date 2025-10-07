@@ -2,7 +2,7 @@
 
 Practice your times table.
 
-## Table of Contents
+# Table of Contents
 - [Features](#features)
 - [Local Development](#local-development)
 - [Known Issues and Bugs](#known-issues-and-bugs)

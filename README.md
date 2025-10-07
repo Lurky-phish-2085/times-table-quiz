@@ -11,7 +11,7 @@ Practice your times table.
 
 ## 👨‍💻 Local Development
 
-Follow the steps below to set it up and run it locally.
+This is a React + Vite application. Follow the steps below to set it up and run it locally.
 
 ### 🛠️ Prerequisites
 

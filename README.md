@@ -2,7 +2,7 @@
 
 Practice your times table.
 
-<h2>Table of Contents</h2>
+**Table of Contents**
 
 - [Times Table Quiz](#times-table-quiz)
   * [🚀 Features](#---features)

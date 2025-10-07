@@ -18,7 +18,7 @@ This is a React + Vite application. Follow the steps below to set it up and run 
 Make sure you have the following installed:
 
 - [Node.js](https://nodejs.org/) (v22.15.1 or higher recommended)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+- [npm](https://www.npmjs.com/)
 
 ### 📦 Installation
 

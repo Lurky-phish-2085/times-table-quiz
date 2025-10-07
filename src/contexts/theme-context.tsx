@@ -1,4 +1,4 @@
-import { createContext, useContext, useLayoutEffect, useState, type PropsWithChildren } from "react";
+import { createContext, useContext, useEffect, useLayoutEffect, useState, type PropsWithChildren } from "react";
 import { useLocalStorage, useMediaQuery } from "usehooks-ts";
 
 type Theme = "light" | "dark";
@@ -30,10 +30,10 @@ export const ThemeProvider = ({ children }: PropsWithChildren) => {
     setTheme(themeToApply);
   }, [themeSetting, systemPreferredTheme]);
 
+  useEffect(() => setThemeSetting(theme), [theme]);
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
-    setThemeSetting((prev) => (prev === "light" ? "dark" : "light"));
   };
 
   const value = {
